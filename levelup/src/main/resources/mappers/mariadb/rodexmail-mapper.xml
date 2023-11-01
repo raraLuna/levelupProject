@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rodexMailMapper">
+	
+	<resultMap type="RodexMail" id="resultRodexMail">
+		<id column="mail_id" property="mailId"/>
+		<result column="sender_name" property="senderName"/>
+		<result column="sender_id" property="senderId"/>
+		<result column="receiver_name" property="receiverName"/>
+		<result column="receiver_id" property="receiverId"/>
+		<result column="receiver_accountid" property="receiverAccountId"/>
+		<result column="send_date" property="sendDate"/>
+	</resultMap>
+
+	<resultMap type="RodexItems" id="resultRodexItems">
+		<result column="mail_id" property="mailId"/>
+		<result column="nameid" property="nameId"/>
+		<result column="unique_id" property="uniqueId"/>
+	</resultMap>
+
+	<insert id="insertRodexMail" parameterType="Map">
+INSERT INTO rodex_mail VALUE (
+NULL,
+'SYSTEM',
+150021,
+#{ receiverName } ,
+#{ receiverId },
+0,
+concat('Dear ',#{ receiverName },'. Thank you for purchase '),
+'Here is your item which you bought.',
+0,
+6,
+0,
+0,
+#{ sendDate },
+2000000000,
+100);
+
+INSERT INTO rodex_items 
+(mail_id, nameid, amount, identify, unique_id) VALUES (
+LAST_INSERT_ID(),
+#{ nameId },
+1,
+1,
+#{ uniqueId });
+
+  
+ </insert>
+	
+	<select id="selectRodexMailId" parameterType="long" resultType="_int">
+		select evol.rodex_items.mail_id from evol.rodex_items where evol.rodex_items.unique_id = #{ uniqueId };
+	</select>
+
+
+	<select id="selectRodexItem" parameterType="long" resultMap="resultRodexItems">
+		select * from evol.rodex_items where evol.rodex_items.unique_id = #{ uniqueId };
+	
+	</select>
+	
+	<delete id="deleteRodexItemOne" parameterType="_int" >
+		delete from evol.rodex_items where evol.rodex_items.mail_id = #{ mailId };
+	</delete>
+	
+		<delete id="deleteRodexEmailOne" parameterType="_int" >
+		delete from evol.rodex_mail where evol.rodex_mail.mail_id = #{ mailId };
+	</delete>
+	
+</mapper>

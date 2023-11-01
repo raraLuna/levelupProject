@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+
+	<resultMap id="resultMember" type="Member">
+		<id property="userId" column="USERID" />
+		<result property="userPwd" column="USERPWD" />
+		<result property="userName" column="USERNAME" />
+		<result property="gender" column="GENDER" />
+		<result property="age" column="AGE" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="lastModified" column="LASTMODIFIED" />
+		<result property="signType" column="SIGNTYPE" />
+		<result property="admin" column="ADMIN_YN" />
+		<result property="loginOk" column="LOGIN_OK" />
+		<result property="photoFilename" column="PHOTO_FILENAME" />
+	</resultMap>
+	
+	<resultMap id="resultList" type="Member">
+		<id property="userId" column="USERID" />
+		<result property="userPwd" column="USERPWD" />
+		<result property="userName" column="USERNAME" />
+		<result property="gender" column="GENDER" />
+		<result property="age" column="AGE" />
+		<result property="phone" column="PHONE" />
+		<result property="email" column="EMAIL" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="lastModified" column="LASTMODIFIED" />
+		<result property="signType" column="SIGNTYPE" />
+		<result property="admin" column="ADMIN_YN" />
+		<result property="loginOk" column="LOGIN_OK" />
+		<result property="photoFilename" column="PHOTO_FILENAME" />
+	</resultMap>
+	
+	<select id="selectLogin" parameterType="Member" resultMap="resultMember">
+		select * from member where userid = #{userId} and userpwd = #{userPwd} and LOGIN_OK = 'Y'
+	</select>
+	
+	<!-- 변수 하나 받는 변수 이름은 아무 것이나 정하면 됨  -->
+	<select id="selectMember" parameterType="string" resultMap="resultMember">
+		select * from member where USERID = #{uid}
+	</select>
+	
+	<select id="selectList" resultMap="resultList">
+		select * from member where admin_yn = 'N'
+	</select>
+	
+	<select id="selectSearchUserId" parameterType="string" resultMap="resultList">
+		select * from member where userid like '%' || #{keyword} || '%' and ADMIN_YN = 'N'
+	</select>
+	
+	<select id="selectSearchGender" parameterType="string" resultMap="resultList">
+		select * from member where gender = #{keyword} and ADMIN_YN = 'N'
+	</select>
+	
+	
+	<!-- 
+		쿼리문에 비교연산자를 그냥 사용하면 
+		태그 엘리먼트 꺽쇠괄호와 혼동하는 문제가 발생할 수 있다
+		이 문제를 미연에 방지하기 위해서 xml 코드 중 xml parser 에 의해 해석하지 말고
+		문장 그대로 해석하라는 뜻으로
+		<![CDATA[ 쿼리문장 ]]>
+		
+	 -->
+	<select id="selectSearchAge" parameterType="_int" resultMap="resultList">
+		select * from member where admin_yn = 'N'  
+		<if test="keyword == 60">
+			<![CDATA[
+			and age >= #{keyword}
+			]]>
+		</if> 
+		<if test="keyword != 60">
+			and age between #{keyword} and #{keyword} + 9
+		</if>
+	</select>
+	
+	<select id="selectSearchEnrollDate" parameterType="SearchDate" resultMap="resultList">
+		select * from member where enroll_date between #{begin} and #{end} and admin_yn = 'N'
+	</select>
+	
+	<select id="selectSearchLoginOK" parameterType="string" resultMap="resultList">
+		select * from member where login_ok = #{keyword} and admin_yn = 'N'
+	</select>
+	
+	<select id="selectCheckId" parameterType="string" resultType="_int">
+		select count(userid) from member where userid = #{uid}
+	</select>
+	
+	<!-- DML 은 int 가 반환되기 때문에 리턴타입 설정못함 -->
+	<insert id="insertMember" parameterType="Member"> 
+		insert into member values (#{userId}, #{userPwd}, #{userName}, #{gender}, #{age}, #{phone}, #{email}, default, default, default, default, default, null)
+	</insert>
+
+	<update id="updateMember" parameterType="Member">
+		update member set age = #{age}, phone = #{phone}, email = #{email} , lastmodified = sysdate where userid = #{userId}
+	</update>
+
+	<update id="updateMember2" parameterType="Member">
+		update member set userpwd = #{ userPwd }, 
+			age = #{age},
+			phone = #{phone}, 
+			email = #{email} , 
+			lastmodified = sysdate 
+				where userid = #{userId}
+	</update>
+
+	
+	<update id="updateLoginOk" parameterType="Member">
+		update member set login_ok = #{loginOk} where userid = #{userId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="string">
+		delete from member where userid = #{userId}
+	</delete>
+	
+	
+</mapper>

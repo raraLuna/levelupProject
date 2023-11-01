@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeMapper">
+
+	<resultMap type="Notice" id="resultNotice">
+		<result column="NOTICE_ID" property="noticeId" />
+		<result column="EMPLOYEE_ID" property="employeeId" />
+		<result column="DEPARTMENT_ID" property="departmentId" />
+		<result column="TEAM_ID" property="teamId" />
+		<result column="NOTICE_TITLE" property="noticeTitle" />
+		<result column="NOTICE_CONTENT" property="noticeContent" />
+		<result column="EDIT_DATE" property="editDate" />
+		<result column="ATTACHEMENT_FILENAME" property="attachementFilename" />
+		<result column="RENAME_FILENAME" property="renameFilename" />
+		<result column="READ_COUNT" property="readCount" />
+		<result column="rank_id" property="rankId" />
+		<result column="rank_name" property="rankName" />
+		<result column="department_name" property="departmentName" />
+		<result column="team_name" property="teamName" />
+		<result column="employee_name" property="employeeName" />
+		<result column="employee_email" property="employeeEmail" />
+		
+		
+	</resultMap>
+	
+	<resultMap type="Notice" id="resultNotice5">
+		<result property="noticeId" column="NOTICE_ID" />		
+		<result property="noticeTitle" column="NOTICE_TITLE" />		
+		<result property="editDate" column="EDIT_DATE" />
+		<result property="attachementFilename" column="ATTACHEMENT_FILENAME" />		
+	</resultMap>
+	
+	
+	<select id="selectList" parameterType="Paging" resultMap="resultNotice">
+		select * from (select rownum rnum, NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+				            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+				            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email
+               from (select  NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+				            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+				            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email
+					    from notice 
+					    join (select 
+					    rank_id, rank_name, department_name, team_name,
+					    employee_id, employee_name, employee_email
+					    from employee
+					        join rank using (rank_id)
+					        join department using (department_id)
+					        join team using (team_id))
+					        using (employee_id)
+					    where TEAM_ID = 'none' and DEPARTMENT_ID = 'none'
+					    order by EDIT_DATE desc)
+									     )  
+		 where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectTList" parameterType="Paging" resultMap="resultNotice">
+		select * from (select rownum rnum, NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+				            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+				            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email
+               from (select  NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+				            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+				            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email
+					    from notice 
+					    join (select 
+					    rank_id, rank_name, department_name, team_name,
+					    employee_id, employee_name, employee_email
+					    from employee
+					        join rank using (rank_id)
+					        join department using (department_id)
+					        join team using (team_id))
+					        using (employee_id)
+					   where TEAM_ID = #{teamId} and DEPARTMENT_ID = #{departmentId}
+					    order by EDIT_DATE desc)
+									     )  
+		where rnum between #{ paging.startRow } and #{ paging.endRow }
+
+	</select>
+	
+	<select id="selectDList" parameterType="Paging" resultMap="resultNotice">
+		select * from (select rownum rnum, NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+				            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+				            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email
+               from (select  NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+				            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+				            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email
+					    from notice 
+					    join (select 
+					    rank_id, rank_name, department_name, team_name,
+					    employee_id, employee_name, employee_email
+					    from employee
+					        join rank using (rank_id)
+					        join department using (department_id)
+					        join team using (team_id))
+					        using (employee_id)
+					   where DEPARTMENT_ID = #{departmentId}
+					    order by EDIT_DATE desc)
+									     )  
+		where rnum between #{ paging.startRow } and #{ paging.endRow }
+	</select>
+
+	<select id="selectOne" parameterType="string" resultMap="resultNotice">
+		
+		select *
+    from notice 
+    join (select 
+    rank_id, rank_name, department_name, team_name,
+    employee_id, employee_name, employee_email
+    from employee
+        join rank using (rank_id)
+        join department using (department_id)
+        join team using (team_id))
+        using (employee_id)
+    where NOTICE_ID = #{noticeId}
+	</select>	
+	
+	<select id="getListCount" resultType="_int">
+		select count(*) from notice where TEAM_ID = 'none' and DEPARTMENT_ID = 'none'
+	</select>
+	
+	<select id="getTListCount" resultType="_int">
+		select count(*) from notice where TEAM_ID = #{ teamId } and DEPARTMENT_ID = #{ departmentId }
+	</select>
+	
+	<select id="getDListCount" resultType="_int">
+		select count(*) from notice where DEPARTMENT_ID = #{ departmentId }
+	</select>
+	
+	<select id="getSearchTitleCount" parameterType="Search" resultType="_int">
+		  select count(*) from notice
+		  WHERE NOTICE_TITLE LIKE '%' || #{keyword} || '%'
+		  <if test="teamId != ''">
+                   AND TEAM_ID = #{teamId} and DEPARTMENT_ID = #{departmentId} 
+          </if>
+          <if test="departmentId != '' and teamId == ''">
+                   AND DEPARTMENT_ID = #{departmentId}
+          </if>
+         
+          
+		 
+	</select>
+	
+	<select id="getSearchContentCount" parameterType="string" resultType="_int">
+		select count(*) from notice where NOTICE_CONTENT like '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="getSearchDateCount" parameterType="SearchDate" resultType="_int">
+		select count(*) from notice where EDIT_DATE between #{ begin } and #{ end }
+	</select>
+	
+	<select id="selectSearchTitle" parameterType="com.gs.levelup.common.Search" resultMap="resultNotice">
+    SELECT * 
+    FROM (SELECT rownum rnum, NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+                TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+                ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME 
+          FROM (SELECT * FROM notice 
+               WHERE NOTICE_TITLE LIKE '%' || #{keyword} || '%'
+               <if test="teamId != null">
+                   AND TEAM_ID = #{teamId} AND DEPARTMENT_ID = #{departmentId}
+               </if>
+               
+               <if test="teamId == null and departmentId != null">
+                   AND DEPARTMENT_ID = #{departmentId}
+               </if>
+               
+               ORDER BY EDIT_DATE DESC)
+         ) 
+    WHERE rnum BETWEEN #{startRow} AND #{endRow}
+</select>
+
+	
+	<select id="selectSearchContent" parameterType="Search" resultMap="resultNotice">
+		select * 
+		from (select rownum rnum, NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+		            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+		            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME 
+		      from (select * from notice 
+		           where NOTICE_CONTENT like '%' || #{ keyword } || '%' 
+		           order by EDIT_DATE desc)
+		     ) 
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchDate" parameterType="Search" resultMap="resultNotice">
+		select * 
+		from (select rownum rnum, NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+		            TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, 
+		            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME 
+		      from (select * from notice 
+		           where EDIT_DATE between #{ begin } and #{ end } 
+		           order by EDIT_DATE desc)
+		     ) 
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<update id="addReadCount" parameterType="string">
+		update notice 
+		set READ_COUNT = READ_COUNT + 1 
+		where NOTICE_ID = #{ noticeId }
+	</update>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		insert into notice 
+		values (default, 
+				#{employeeId}, #{departmentId}, #{teamId}, #{noticeTitle}, 
+				#{noticeContent}, sysdate, #{attachementFilename}, default, #{renameFilename})
+	</insert>
+	
+	
+	<update id="updateNotice" parameterType="Notice">
+    update notice 
+    set EMPLOYEE_ID = #{employeeId}, 
+        NOTICE_TITLE = #{noticeTitle},
+        NOTICE_CONTENT = #{noticeContent}, 
+        EDIT_DATE = sysdate
+    <if test="attachementFilename == null">
+        , ATTACHEMENT_FILENAME = null, 
+        RENAME_FILENAME = null
+    </if>
+    <if test="attachementFilename != null">
+        , ATTACHEMENT_FILENAME = #{attachementFilename}, 
+        RENAME_FILENAME = #{renameFilename}
+    </if>
+    where NOTICE_ID = #{noticeId}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="string">
+		delete from notice where NOTICE_ID = #{ noticeId }
+	</delete>
+	
+	<select id="selectNotices5" resultMap="resultNotice5">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, NOTICE_ID, NOTICE_TITLE, EDIT_DATE, ATTACHEMENT_FILENAME
+		    from (select * from notice 
+		          where DEPARTMENT_ID = #{ keyword } 
+		)) 
+		where rnum <= 10
+		]]>
+	</select>
+	
+</mapper>
+
+
+
+
+

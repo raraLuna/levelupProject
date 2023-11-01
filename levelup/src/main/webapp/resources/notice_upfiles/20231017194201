@@ -1,0 +1,13 @@
+INSERT INTO notice (NOTICE_ID, EMPLOYEE_ID, DEPARTMENT_ID, TEAM_ID, NOTICE_TITLE, NOTICE_CONTENT, EDIT_DATE, ATTACHEMENT_FILENAME, READ_COUNT)
+VALUES (
+    sys_guid(),         -- NOTICE_ID, 새로운 고유한 값으로 대체됨
+    '824332062B394A13AA267970E3DC242F',         -- EMPLOYEE_ID, 새로운 고유한 값으로 대체됨
+    '03A9D35BA7A24194BA123A4962CBCBCD', -- DEPARTMENT_ID, 부서 ID 값
+    '53D93397968647418D7A40C3045D0875',       -- TEAM_ID, 팀 ID 값
+    '첫번째 공지 테스트입니다.',   -- NOTICE_TITLE, 공지 제목
+    '본문 테스트입니다.',   -- NOTICE_CONTENT, 공지 본문
+    TO_DATE('2023-10-16', 'YYYY-MM-DD'), -- EDIT_DATE, 공지 작성 날짜
+    '첨부파일명.txt',   -- ATTACHEMENT_FILENAME, 첨부 파일명
+    0                  -- READ_COUNT, 조회수 초기값
+);
+commit;

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="paymentMapper">
+
+	<resultMap type="Payment" id="resultPayment">
+		<result column="PAYMENT_ID" property="paymentId" />
+		<result column="ITEM_ID" property="itemId" />
+		<result column="CHAR_ID" property="charId" />
+		<result column="ACCOUNT_ID" property="accountId" />
+		<result column="AMOUNT" property="amount" />
+		<result column="PAYMENT_DATE" property="paymentDate" />
+		<result column="PAYMENT_STATUS" property="paymentStatus" />
+		<result column="REFUND_DATE" property="refundDate" />
+		<result column="REFUND_CAUSE" property="refundCause" />
+		<result column="CHAR_NAME" property="charName" />
+		<result column="PAYMENT_KEY" property="paymentKey" />
+		<result column="UNIQUE_ID" property="uniqueId" />
+		<result column="EMAIL_STATUS" property="emailStatus" />
+	</resultMap>
+	
+		<resultMap type="Payment" id="resultList">
+		<result column="PAYMENT_ID" property="paymentId" />
+		<result column="ITEM_ID" property="itemId" />
+		<result column="CHAR_ID" property="charId" />
+		<result column="ACCOUNT_ID" property="accountId" />
+		<result column="AMOUNT" property="amount" />
+		<result column="PAYMENT_DATE" property="paymentDate" />
+		<result column="PAYMENT_STATUS" property="paymentStatus" />
+		<result column="REFUND_DATE" property="refundDate" />
+		<result column="REFUND_CAUSE" property="refundCause" />
+		<result column="CHAR_NAME" property="charName" />
+		<result column="PAYMENT_KEY" property="paymentKey" />
+		<result column="UNIQUE_ID" property="uniqueId" />
+		<result column="EMAIL_STATUS" property="emailStatus" />
+	</resultMap>
+	
+	<resultMap type="Payment" id="resultList2">
+	    <result property="itemId" column="ITEM_ID"/>
+	    <result property="amount" column="count"/>
+	</resultMap>
+	
+	
+	<select id="insertPayment" parameterType="Payment" resultMap="resultPayment">
+		insert into payment 
+		values (default, #{itemId}, #{charId}, #{accountId}, #{amount}, sysdate, null, null, '3',  #{ charName }, #{paymentKey}, #{uniqueId}, default)
+	</select>
+	
+	<select id="selectListCount" resultType="_int">
+		select count(*) from PAYMENT
+	</select>
+	
+	<select id="selectSearchPaymentIdCount" parameterType="string" resultType="_int">
+		select count(*) from PAYMENT
+		where PAYMENT_ID = #{ keyword }
+	</select>
+	
+	
+	<select id="selectSearchDateCount" resultType="_int" parameterType="Search">
+		select count(*) from PAYMENT 
+		where PAYMENT_DATE between #{begin} and #{end}
+	</select>
+
+	<select id="selectSearchPaymentStatusCount" parameterType="string" resultType="_int">
+		select count(*) from PAYMENT
+		where PAYMENT_STATUS = #{ paymentstatus }
+	</select>
+	
+	<select id="selectList" parameterType="Paging" resultMap="resultList">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, PAYMENT_ID, ITEM_ID, CHAR_ID, 
+				   ACCOUNT_ID, AMOUNT, PAYMENT_DATE, 
+		           PAYMENT_STATUS, REFUND_DATE, REFUND_CAUSE, CHAR_NAME, 
+		           PAYMENT_KEY, UNIQUE_ID, EMAIL_STATUS
+		      from (select * from PAYMENT 
+		           order by PAYMENT_DATE desc)) 
+		where rnum >= #{ startRow } and rnum <= #{ endRow }
+		]]>
+	</select>
+	
+	<select id="selectSearchPaymentId" parameterType="Search" resultMap="resultPayment">
+		SELECT * FROM PAYMENT WHERE PAYMENT_ID = #{keyword}
+	</select>
+	
+	<select id="selectPaymentOne" parameterType="string" resultMap="resultPayment">
+		SELECT * FROM PAYMENT WHERE PAYMENT_KEY = #{ paymentKey }
+	</select>
+		
+	<select id="selectSearchDate" parameterType="Search" resultMap="resultList">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, PAYMENT_ID, ITEM_ID, CHAR_ID, 
+				   ACCOUNT_ID, AMOUNT, PAYMENT_DATE, 
+		           PAYMENT_STATUS, REFUND_DATE, REFUND_CAUSE, CHAR_NAME, 
+		           PAYMENT_KEY, UNIQUE_ID, EMAIL_STATUS
+		      from (select * from PAYMENT 
+		            where PAYMENT_DATE between #{begin} and #{end} 
+		             order by PAYMENT_DATE desc)) 
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	<select id="selectSearchStatus" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, PAYMENT_ID, ITEM_ID, CHAR_ID, 
+				   ACCOUNT_ID, AMOUNT, PAYMENT_DATE, 
+		           PAYMENT_STATUS, REFUND_DATE, REFUND_CAUSE, CHAR_NAME, 
+		           PAYMENT_KEY, UNIQUE_ID, EMAIL_STATUS
+			from (select * from PAYMENT 
+				 where PAYMENT_STATUS = #{ paymentstatus } 
+				 order by PAYMENT_DATE DESC))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<update id="cancelPayment" parameterType="Search">
+		UPDATE PAYMENT
+		SET PAYMENT_STATUS = '2',
+		REFUND_CAUSE = #{cancelReason},
+		PAYMENT_DATE = SYSDATE
+		WHERE PAYMENT_KEY = #{paymentKey}
+	</update>
+	
+	<update id="updatePaymentState" parameterType="string">
+    	update payment 
+    	set PAYMENT_STATUS = '1' where PAYMENT_KEY = #{ paymentKey }
+	</update>
+	
+	<select id="selectPaymentKey"   resultMap="resultPayment">
+		select * from payment where payment_key = #{ paymentKey }
+	</select>
+	
+	<select id="selectPaymentList" parameterType="int" resultMap="resultList">
+		select * from payment where account_id = #{ accountId }
+	</select>
+	
+	<delete id="deletePayment" parameterType="string">
+		delete from payment where payment_key = #{ paymentKey }
+	</delete>
+	
+	<select id="selectItemList5" resultMap="resultList2">
+		SELECT ITEM_ID, COUNT(*) AS COUNT
+		FROM PAYMENT
+		GROUP BY ITEM_ID
+		ORDER BY COUNT(*) DESC
+		FETCH FIRST 5 ROWS ONLY
+	</select>
+	
+</mapper>

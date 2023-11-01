@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+   https://www.springframework.org/schema/beans/spring-beans.xsd 
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+   
+   <!-- Root Context: defines shared resources visible to all other web components -->
+   <!-- web context == root(근간) DB연결 설정을 여기서 하게 됨 -->
+   <!-- 1. DataSource(class) 등록 작업 -->
+      <!-- 
+         (java code로 생각한다면)
+         import org.apache.commons.dbcp.BasicDataSource;
+         
+         BasicDataSource realDataSource = new BasicDataSource();
+         
+         try{
+            드라이브 등록, db 연결 설정 등 
+         }catch(Exception e) {
+            예외처리
+         }finally{
+            realDataSource.close();
+         }
+         
+       -->
+       <!-- id : 레퍼런스변수명 -->
+   <bean class="org.apache.commons.dbcp.BasicDataSource" id="realDataSource" destroy-method="close">
+      <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+      <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+      <property name="username" value="c##levelup"/>
+      <property name="password" value="levelup"/>
+   </bean>
+   
+   <!-- 2. 전달값이 ?에 적용되어 실행되는 쿼리문 확인용 로그와 ResultSet 결과값을 로그로 출력되게 하려면
+         DataSource에 로그를 연결 설정해야 함 
+         pom.xml의 log4jdbc-remix 라이브러리의 클래스 사용함-->
+      <!-- 
+         (java code로 적어본다면)
+         import net.sf.log4jdbc.Log4jdbcProxyDataSource;
+         
+         Log4jdbcProxyDataSource dataSource = new Log4jdbcProxyDataSource(realDataSource);
+       -->
+   
+   <bean class="net.sf.log4jdbc.Log4jdbcProxyDataSource" id="dataSource" >
+      <constructor-arg ref="realDataSource" /> <!-- 위의 bean을 연결함 -->
+      <property name="logFormatter">
+         <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+            <property name="loggingType" value="MULTI_LINE" /> <!-- 여러줄로 출력 -->
+            <property name="sqlPrefix" value="[SQL]" /> <!-- 앞에 [SQL] 붙여서 출력 -->
+         </bean>
+      </property>
+   </bean>
+   
+   <!-- 3. dataSource 와 spring과 mybatis 연결 설정 -->
+   <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSession">
+      <property name="configLocation" value="classpath:mybatis-config.xml" />
+      <!-- mybatis 경로를 지정. (src/main/java, src/main/resources == classpath) -->
+      <property name="dataSource" ref="dataSource"/> <!-- 위의 bean과 연결 -->
+   </bean>
+   
+   <!-- 4. dao 에서 사용할 mybatis 객체 생성 설정 -->
+   <bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSessionTemplate">
+      <constructor-arg index="0" ref="sqlSession" />
+   </bean>
+   
+   <!-- 5. 트랜젝션(commit, rollback) 관리 설정 : spring AOP 사용-->
+      <!-- 5-1. 트랜젝션 관리 클래스 등록 : spring-jdbc -->
+   <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+      <property name="dataSource" ref="dataSource" /> <!-- DB와 로그 연결 -->
+   </bean>
+   
+      <!-- 5-2. service에서 필요한 실행 시점에서 commit 또는 rollback 이 구동되게 AOP설정 -->
+   <tx:advice id="txAdvice" transaction-manager="transactionManager">
+      <tx:attributes>
+         <tx:method name="select*"  read-only="true" rollback-for="Exception"/> 
+         <!-- select로 시작하는 모든 구문은 DB를 읽기만 한다(commit안함. 오류 시에 rollback함 -->
+         <tx:method name="insert*" rollback-for="Exception"/>
+         <!-- select로 시작하는 모든 구문은 DB를 읽기만 한다(commit 함. 오류 시에 rollback함 -->
+         <tx:method name="update*" rollback-for="Exception"/>
+         <tx:method name="delete*" rollback-for="Exception"/>
+         <!--  read-only 가 있으면 commit 안하고, 없으면  commit 실행함 -->
+      </tx:attributes>
+   </tx:advice>
+   
+   <tx:annotation-driven transaction-manager="transactionManager" />
+   <!-- annotation으로 관리하겠다 -->
+   
+   <aop:config proxy-target-class="true">
+      <aop:pointcut expression="execution(* org.ict.first..*Impl.*(..))" id="serviceMethod" /> <!-- 실행지점설정 -->
+      <aop:advisor advice-ref="txAdvice" id="transactionAdvisor" pointcut-ref="serviceMethod" /> 
+      <!-- 위에 정의한 것들에 대해 트랙젝션 실행, 위의 실행 지점 참조 -->
+   </aop:config>
+   <!-- org.ict.first.. : first 아래 있는 모든 하위 패키지 패키지 -->
+   <!-- *Impl.*(..) : Impl로 끝나는 모든 클래스 중 모든 매개변수의 클래스 -->
+   <!-- expression="execution(* org.ict.first..*Impl.*(..))" : aspect 문법 -->
+   
+</beans>

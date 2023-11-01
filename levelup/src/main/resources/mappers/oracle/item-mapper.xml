@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itemMapper">
+	<resultMap type="Item" id="resultItem">
+		<result column="ITEM_ID" property="itemId" />
+		<result column="ITEM_TYPE" property="itemType" />
+		<result column="ITEM_DATA" property="itemData" />
+		<result column="ITEM_NAME" property="itemName" />
+		<result column="PRICE" property="price" />
+		<result column="GAMEPRICE" property="gamePrice" />
+		<result column="DISCOUNT_RATE" property="discountRate" />
+	</resultMap>
+	
+	<resultMap type="Item" id="resultItem3">
+		<result column="ITEM_ID" property="itemId" />
+		<result column="ITEM_NAME" property="itemName" />
+		<result column="DISCOUNT_RATE" property="discountRate" />
+	</resultMap>
+	
+	<select id="selectOneItem" parameterType="string" resultMap="resultItem">
+		select * from item where item_name = #{ itemName }
+	</select>
+	
+	<select id="selectItem" parameterType="_int" resultMap="resultItem">
+		select * from item where ITEM_ID = #{ itemId }
+	</select>
+
+	<select id="selectItem3" resultMap="resultItem3">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, ITEM_ID, ITEM_NAME, DISCOUNT_RATE 
+		    from (select * from item 
+		          order by DISCOUNT_RATE desc nulls last)) 
+		where rnum <= 6
+		]]>
+	</select>
+</mapper>

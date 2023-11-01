@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comMapper">
+
+	<resultMap type="Community" id="resultCom">
+	</resultMap>
+	
+	<resultMap type="Community" id="resultBoard5">
+		<result property="board_id" column="BOARD_ID" />		
+		<result property="board_title" column="BOARD_TITLE" />		
+		<result property="board_date" column="BOARD_DATE" />
+		<result property="attachement_filename" column="ATTACHEMENT_FILENAME" />		
+	</resultMap>
+
+	<select id="selectListCount" resultType="_int">
+		select count(*) from community where delYN = 'n' and ref_id is null
+	</select>
+		
+	<select id="selectList" parameterType="Paging" resultMap="resultCom">
+		select * from (select rownum rnum, BOARD_ID, DEPARTMENT_ID, 
+				            EMPLOYEE_ID, BOARD_TITLE, BOARD_DATE, board_body, 
+				            ATTACHEMENT_FILENAME, BOARD_TYPE, READ_COUNT, 
+				            ref_id , refyn, delyn , team_id,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email
+               from (select  BOARD_ID, community.DEPARTMENT_ID, 
+				            EMPLOYEE_ID, BOARD_TITLE, BOARD_DATE, board_body, 
+				            ATTACHEMENT_FILENAME, BOARD_TYPE, READ_COUNT, 
+				            ref_id , refyn, delyn , community.team_id,
+				             rank_id, rank_name, department_name, team_name,
+					     employee_name, employee_email 
+					    from community 
+					    join (select 
+					    rank_id, rank_name, department_name, team_name,
+					    employee_id, employee_name, employee_email
+					    from employee
+					        join rank using (rank_id)
+					        join department using (department_id)
+					        join team using (team_id))
+					        using (employee_id)
+					    where delYN = 'n' and ref_id is null
+					    order by BOARD_DATE desc)
+									     )  
+		 where rnum between #{ startRow } and #{ endRow }
+	</select>
+<!-- 
+	<select id="selectList" parameterType="Paging" resultMap="resultCom">
+		select * from (select rownum rnum, BOARD_ID, DEPARTMENT_ID, 
+				            EMPLOYEE_ID, BOARD_TITLE, BOARD_DATE, board_body, 
+				            ATTACHEMENT_FILENAME, BOARD_TYPE, READ_COUNT, 
+				            ref_id , refyn, delyn , team_id
+				      from (select * from Community
+				      		where delyn = 'n' and ref_id is null
+				            order by BOARD_DATE desc)
+				     ) 
+		 where rnum between #{ startRow } and #{ endRow }
+	</select>
+ -->
+	<select id="selectReplys" parameterType="string" resultMap="resultCom">
+		select *
+    from community 
+    join (select 
+    rank_id, rank_name, department_name, team_name,
+    employee_id, employee_name, employee_email
+    from employee
+        join rank using (rank_id)
+        join department using (department_id)
+        join team using (team_id))
+        using (employee_id)
+    where ref_id = #{ board_id } and delyn = 'n'
+	</select>
+	
+	<select id="selectListHashMap" parameterType="Paging" resultType="HashMap">
+			select * 
+				from community c
+				join employee e using (employee_id)
+				join department d on (c.department_id = d.department_id)
+				join rank r on (e.rank_id = r.rank_id)
+	</select>
+
+	<update id="updateReadCount" parameterType="string">
+		update COMMUNITY 
+		set READ_COUNT = READ_COUNT + 1 
+		where BOARD_ID = #{ board_id }
+	</update>
+
+	<update id="updateAttach" parameterType="Community">
+		update COMMUNITY 
+		set ATTACHEMENT_FILENAME = #{ attachement_filename } 
+		where BOARD_ID = #{ board_id }
+	</update>
+
+	<update id="updateRepReadCount" parameterType="string">
+		update COMMUNITY 
+		set READ_COUNT = READ_COUNT + 1 
+		where ref_ID = #{ board_id }
+	</update>
+
+	<update id="updateCommunityRep" parameterType="string">
+		update COMMUNITY 
+		set refyn = 'y' 
+		where BOARD_ID = #{ board_id }
+	</update>
+
+	<select id="selectCommunity" parameterType="string" resultType="Community">
+		select *
+    from community 
+    join (select 
+    rank_id, rank_name, department_name, team_name,
+    employee_id, employee_name, employee_email
+    from employee
+        join rank using (rank_id)
+        join department using (department_id)
+        join team using (team_id))
+        using (employee_id)
+    where board_id = #{ board_id }
+	</select>	
+
+	<insert id="insertCommunity" parameterType="Community">
+		insert into Community 
+		values (#{board_id}, #{department_id},
+				#{employee_id},  #{board_title}, 
+				sysdate, #{attachement_filename}, 
+				default, 0,  null , #{board_body}, 
+				 #{team_id}, default, default)
+	</insert>
+
+	<insert id="insertCommunityRep" parameterType="Community">
+		insert into Community 
+		values (#{board_id}, #{department_id},
+				#{employee_id},  #{board_title}, 
+				sysdate, #{attachement_filename}, 
+				default, 0,  #{ ref_id } , #{board_body}, 
+				 #{team_id}, default, default)
+	</insert>
+	
+	<update id="deleteCommunity" parameterType="string">
+		update Community set delYN = 'y' where Board_ID = #{ board_id }
+	</update>
+	
+	<select id="selectCommunities5" resultMap="resultBoard5">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, BOARD_ID, BOARD_TITLE, BOARD_DATE, ATTACHEMENT_FILENAME 
+		    from (select * from community 
+		          where DEPARTMENT_ID = #{ keyword } 
+		)) 
+		where rnum <= 10
+		]]>
+	</select>
+		
+			<update id="updateCommunity" parameterType="Community">
+    update Community 
+    set   
+BOARD_TITLE = #{board_title},
+ATTACHEMENT_FILENAME = #{attachement_filename},
+BOARD_BODY = #{board_body}
+    where BOARD_ID = #{board_id}
+	</update>
+
+	
+	<select id="selectSearchCount" parameterType="string" resultType="_int">
+		select count(*) from (
+	
+				select rownum rnum, BOARD_ID, DEPARTMENT_ID, 
+							            EMPLOYEE_ID, BOARD_TITLE, BOARD_DATE, board_body, 
+							            ATTACHEMENT_FILENAME, BOARD_TYPE, READ_COUNT, 
+							            ref_id , refyn, delyn , team_id,
+							             rank_id, rank_name, department_name, team_name,
+								     employee_name, employee_email
+			               from (
+			               
+			               select  BOARD_ID, community.DEPARTMENT_ID, 
+							            EMPLOYEE_ID, BOARD_TITLE, BOARD_DATE, board_body, 
+							            ATTACHEMENT_FILENAME, BOARD_TYPE, READ_COUNT, 
+							            ref_id , refyn, delyn , community.team_id,
+							             rank_id, rank_name, department_name, team_name,
+								     employee_name, employee_email 
+								    from community 
+								    join (select 
+								    rank_id, rank_name, department_name, team_name,
+								    employee_id, employee_name, employee_email
+								    from employee
+								        join rank using (rank_id)
+								        join department using (department_id)
+								        join team using (team_id))
+								        using (employee_id)
+								    where delYN = 'n' and ref_id is null
+								    
+								    and lower(BOARD_TITLE) like lower('%' || #{ keyword } || '%')
+			OR lower(ATTACHEMENT_FILENAME) like lower('%' || #{ keyword } || '%')
+			OR lower(BOARD_BODY) like lower('%' || #{ keyword } || '%')
+			OR lower(employee_name) like lower('%' || #{ keyword } || '%')
+								    
+								    order by BOARD_DATE desc)
+								    
+									     )  
+	</select>
+
+	<select id="selectSearch" parameterType="Search" resultMap="resultCom">
+	select * from (
+	
+				select rownum rnum, BOARD_ID, DEPARTMENT_ID, 
+							            EMPLOYEE_ID, BOARD_TITLE, BOARD_DATE, board_body, 
+							            ATTACHEMENT_FILENAME, BOARD_TYPE, READ_COUNT, 
+							            ref_id , refyn, delyn , team_id,
+							             rank_id, rank_name, department_name, team_name,
+								     employee_name, employee_email
+			               from (
+			               
+			               select  BOARD_ID, community.DEPARTMENT_ID, 
+							            EMPLOYEE_ID, BOARD_TITLE, BOARD_DATE, board_body, 
+							            ATTACHEMENT_FILENAME, BOARD_TYPE, READ_COUNT, 
+							            ref_id , refyn, delyn , community.team_id,
+							             rank_id, rank_name, department_name, team_name,
+								     employee_name, employee_email 
+								    from community 
+								    join (select 
+								    rank_id, rank_name, department_name, team_name,
+								    employee_id, employee_name, employee_email
+								    from employee
+								        join rank using (rank_id)
+								        join department using (department_id)
+								        join team using (team_id))
+								        using (employee_id)
+								    where delYN = 'n' and ref_id is null
+								    
+								    and lower(BOARD_TITLE) like lower('%' || #{ keyword } || '%')
+									OR lower(ATTACHEMENT_FILENAME) like lower('%' || #{ keyword } || '%')
+									OR lower(BOARD_BODY) like lower('%' || #{ keyword } || '%')
+									OR lower(employee_name) like lower('%' || #{ keyword } || '%')
+														    
+								    order by BOARD_DATE desc)
+								    
+									     )  
+		 where	rnum between #{ startRow } and #{ endRow }
+	</select>
+<!--	
+	<select id="getSearchContentCount" parameterType="string" resultType="_int">
+		select count(*) from Community where Community_CONTENT like '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="getSearchDateCount" parameterType="SearchDate" resultType="_int">
+		select count(*) from Community where EDIT_DATE between #{ begin } and #{ end }
+	</select>
+	
+	<select id="selectSearchTitle" parameterType="Search" resultMap="resultCom">
+		select * 
+		from (select rownum rnum, Community_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+		            TEAM_ID, Community_TITLE, Community_CONTENT, EDIT_DATE, 
+		            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME 
+		      from (select * from Community 
+		           where Community_TITLE like '%' || #{ keyword } || '%' 
+		           order by EDIT_DATE desc)
+		     ) 
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchContent" parameterType="Search" resultMap="resultCom">
+		select * 
+		from (select rownum rnum, Community_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+		            TEAM_ID, Community_TITLE, Community_CONTENT, EDIT_DATE, 
+		            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME 
+		      from (select * from Community 
+		           where Community_CONTENT like '%' || #{ keyword } || '%' 
+		           order by EDIT_DATE desc)
+		     ) 
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchDate" parameterType="Search" resultMap="resultCom">
+		select * 
+		from (select rownum rnum, Community_ID, EMPLOYEE_ID, DEPARTMENT_ID, 
+		            TEAM_ID, Community_TITLE, Community_CONTENT, EDIT_DATE, 
+		            ATTACHEMENT_FILENAME, READ_COUNT, RENAME_FILENAME 
+		      from (select * from Community 
+		           where EDIT_DATE between #{ begin } and #{ end } 
+		           order by EDIT_DATE desc)
+		     ) 
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	
+
+	
+
+ -->
+</mapper>
+
+
+
+
+

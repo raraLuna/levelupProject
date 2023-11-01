@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="logMapper">
+
+<!-- 	<resultMap type="User" id="resultUser"> -->
+<!-- 		<id column="account_id" property="accountId" /> -->
+<!-- 		<result column="userid" property="userId"/> -->
+<!-- 		<result column="user_pass" property="userPass"/> -->
+<!-- 		<result column="email" property="email"/> -->
+<!-- 		<result column="logincount" property="logincount"/> -->
+<!-- 		<result column="lastlogin" property="lastlogin"/> -->
+<!-- 	</resultMap> -->
+	
+	<resultMap type="CharLog" id="resultCharLog">
+		<result column="time" property="time"/>
+		<result column="char_id" property="charId"/>
+		<result column="char_msg" property="charMsg"/>
+		<result column="account_id" property="accountId"/>
+		<result column="hair_color" property="hairColor"/>
+		<result column="char_num" property="charNum"/>
+	</resultMap>
+	
+	<resultMap type="Inventory" id="resultInventory">
+		<result column="char_id" property="charId"/>
+		<result column="unique_id" property="uniqueId"/>
+	</resultMap>
+	
+	<resultMap type="LoginLog" id="resultLoginLog">
+	</resultMap>
+	
+	<resultMap type="PickLog" id="resultPickLog">
+		<result column="char_id" property="charId"/>
+		<result column="unique_id" property="uniqueId"/>
+	</resultMap>
+
+	<select id="selectCharLog" resultMap="resultCharLog">
+		select * from evol.charlog  where char_id = #{charId}
+	</select>
+
+	<select id="selectLoginLog" resultMap="resultLoginLog">
+		select * from evol.loginlog where user = #{userId}
+	</select>
+	<select id="selectPickLog" resultMap="resultPickLog">
+		select * from evol.picklog  where char_id = #{charId}
+	</select>
+	
+	<select id="selectInventory" parameterType="_int" resultMap="resultInventory">
+		select * from evol.inventory where char_id = #{charId}
+	</select>
+	
+	<select id="selectPayItemPickLog" parameterType="long" resultType="_int">
+		select count(*) from evol.picklog where evol.picklog.unique_id = #{ uniqueId }
+	</select>
+	
+	<select id="selectPayItemPickLogAll" resultMap="resultPickLog">
+		select * from evol.picklog
+	</select>
+</mapper>

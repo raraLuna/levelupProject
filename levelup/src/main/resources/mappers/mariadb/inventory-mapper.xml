@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inventoryMapper">
+
+	<resultMap id="resultInventory" type="Inventory">
+		<id column="id" property="id"/>
+		<result column="nameid" property="nameId" />
+		<result column="ITEM_ID" property="itemId"/>
+		<result column="ITEM_NAME" property="itemName"/>
+		<result column="ITEM_TYPE" property="itemType"/>
+		<result column="PRICE" property="price"/>
+		<result column="GAMEPRICE" property="gamePrice"/>
+		<result column="unique_id" property="uniqueId"/>
+		<result column="amount" property="amount"/>
+		<result column="char_id" property="charId"/>
+	</resultMap> 
+	
+	<resultMap id="resultList" type="Inventory">
+		<result column="id" property="id"/>
+		<result column="nameid" property="nameId" />
+		<result column="ITEM_ID" property="itemId"/>
+		<result column="ITEM_NAME" property="itemName"/>
+		<result column="ITEM_TYPE" property="itemType"/>
+		<result column="PRICE" property="price"/>
+		<result column="GAMEPRICE" property="gamePrice"/>
+		<result column="unique_id" property="uniqueId"/>
+		<result column="amount" property="amount"/>
+		<result column="char_id" property="charId"/>
+	</resultMap> 
+	
+	<select id="selectUserInventory" parameterType="_int" resultMap="resultList">
+		SELECT id, nameid, ITEM_NAME, ITEM_TYPE, 
+			PRICE, GAMEPRICE, unique_id, amount, char_id
+			FROM evol.inventory A
+			LEFT JOIN evol.ITEM B
+			ON A.nameid = B.ITEM_ID
+			WHERE char_id = #{ charid }
+	</select>
+	
+	<select id="selectAll" resultMap="resultList">
+		SELECT * FROM evol.ITEM	
+	</select>
+	
+	<select id="selectCharInventory" parameterType="_int" resultMap="resultInventory">
+		select * from evol.inventory where char_id = #{ charId }
+	</select>
+	
+	<select id="selectPaymentItem" parameterType="Inventory" resultMap="resultInventory">
+		select * from evol.inventory where unique_id = #{ uniqueId }
+	</select>
+	
+	<update id="updateItemChange" parameterType="Case">
+		update evol.inventory
+		set evol.inventory.nameid = #{ newItemId },
+			evol.inventory.amount = #{ newItemAmount }			
+		where evol.inventory.char_id = #{ charId } and evol.inventory.nameid = #{ originalItemId } 
+		and evol.inventory.unique_id = #{ uniqueId }
+	</update>
+	
+	<delete id="deleteItemOne" parameterType="Case">
+		delete from evol.inventory
+		where evol.inventory.char_id = #{ charId } and evol.inventory.nameid = #{ originalItemId }
+		and evol.inventory.unique_id = #{ uniqueId }
+	</delete>
+</mapper>

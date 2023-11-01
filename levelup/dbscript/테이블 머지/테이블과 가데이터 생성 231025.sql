@@ -1,0 +1,1091 @@
+
+--------------------------------------------------------
+--  파일이 생성됨 - 금요일-10월-20-2023   
+--------------------------------------------------------
+DROP TABLE "RANK" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table RANK
+--------------------------------------------------------
+
+  CREATE TABLE "RANK" 
+   (	"RANK_ID" VARCHAR2(32), 
+	"RANK_NAME" VARCHAR2(32)
+   ) ;
+
+   COMMENT ON COLUMN "RANK"."RANK_ID" IS '직급 ID';
+   COMMENT ON COLUMN "RANK"."RANK_NAME" IS '직급명';
+   COMMENT ON TABLE "RANK"  IS '직급';
+REM INSERTING into RANK
+SET DEFINE OFF;
+Insert into RANK (RANK_ID,RANK_NAME) values ('emp','사원');
+Insert into RANK (RANK_ID,RANK_NAME) values ('intern','인턴');
+Insert into RANK (RANK_ID,RANK_NAME) values ('chief','주임');
+Insert into RANK (RANK_ID,RANK_NAME) values ('senior','대리');
+Insert into RANK (RANK_ID,RANK_NAME) values ('jman','과장');
+Insert into RANK (RANK_ID,RANK_NAME) values ('sman','차장');
+Insert into RANK (RANK_ID,RANK_NAME) values ('jdirec','전무');
+Insert into RANK (RANK_ID,RANK_NAME) values ('direc','이사');
+Insert into RANK (RANK_ID,RANK_NAME) values ('ceo','CEO');
+--------------------------------------------------------
+--  DDL for Index PK_RANK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_RANK" ON "RANK" ("RANK_ID");
+--------------------------------------------------------
+--  Constraints for Table RANK
+--------------------------------------------------------
+
+  ALTER TABLE "RANK" MODIFY ("RANK_ID" NOT NULL ENABLE);
+  ALTER TABLE "RANK" MODIFY ("RANK_NAME" NOT NULL ENABLE);
+  ALTER TABLE "RANK" ADD CONSTRAINT "PK_RANK" PRIMARY KEY ("RANK_ID")
+  USING INDEX  ENABLE;
+
+--------------------------------------------------------
+--  파일이 생성됨 - 금요일-10월-20-2023   
+--------------------------------------------------------
+DROP TABLE "DEPARTMENT" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table DEPARTMENT
+--------------------------------------------------------
+
+  CREATE TABLE "DEPARTMENT" 
+   (	"DEPARTMENT_ID" VARCHAR2(32), 
+	"DEPARTMENT_NAME" VARCHAR2(32)
+   ) ;
+
+   COMMENT ON COLUMN "DEPARTMENT"."DEPARTMENT_ID" IS '부서 ID';
+   COMMENT ON COLUMN "DEPARTMENT"."DEPARTMENT_NAME" IS '부서명';
+   COMMENT ON TABLE "DEPARTMENT"  IS '부서';
+REM INSERTING into DEPARTMENT
+SET DEFINE OFF;
+Insert into DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME) values ('dev','개발부');
+Insert into DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME) values ('marketing','영업부');
+Insert into DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME) values ('trade','무역부');
+Insert into DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME) values ('accounting','경리부');
+Insert into DEPARTMENT (DEPARTMENT_ID,DEPARTMENT_NAME) values ('none','미정');
+--------------------------------------------------------
+--  DDL for Index PK_DEPARTMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_DEPARTMENT" ON "DEPARTMENT" ("DEPARTMENT_ID");
+--------------------------------------------------------
+--  Constraints for Table DEPARTMENT
+--------------------------------------------------------
+
+  ALTER TABLE "DEPARTMENT" MODIFY ("DEPARTMENT_ID" NOT NULL ENABLE);
+  ALTER TABLE "DEPARTMENT" MODIFY ("DEPARTMENT_NAME" NOT NULL ENABLE);
+  ALTER TABLE "DEPARTMENT" ADD CONSTRAINT "PK_DEPARTMENT" PRIMARY KEY ("DEPARTMENT_ID")
+  USING INDEX  ENABLE;
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 금요일-10월-20-2023   
+--------------------------------------------------------
+DROP TABLE "TEAM" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table TEAM
+--------------------------------------------------------
+
+  CREATE TABLE "TEAM" 
+   (	"TEAM_ID" VARCHAR2(32), 
+	"TEAM_NAME" VARCHAR2(32)
+   ) ;
+
+   COMMENT ON COLUMN "TEAM"."TEAM_ID" IS '팀 ID';
+   COMMENT ON COLUMN "TEAM"."TEAM_NAME" IS '팀명';
+   COMMENT ON TABLE "TEAM"  IS '팀';
+REM INSERTING into TEAM
+SET DEFINE OFF;
+Insert into TEAM (TEAM_ID,TEAM_NAME) values ('backend','백엔드');
+Insert into TEAM (TEAM_ID,TEAM_NAME) values ('webfront','프론트개발');
+Insert into TEAM (TEAM_ID,TEAM_NAME) values ('anddev','안드로이드개발');
+Insert into TEAM (TEAM_ID,TEAM_NAME) values ('iosdev','iOS개발');
+Insert into TEAM (TEAM_ID,TEAM_NAME) values ('cs','고객서비스');
+--------------------------------------------------------
+--  DDL for Index PK_TEAM
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_TEAM" ON "TEAM" ("TEAM_ID");
+--------------------------------------------------------
+--  Constraints for Table TEAM
+--------------------------------------------------------
+
+  ALTER TABLE "TEAM" MODIFY ("TEAM_ID" NOT NULL ENABLE);
+  ALTER TABLE "TEAM" MODIFY ("TEAM_NAME" NOT NULL ENABLE);
+  ALTER TABLE "TEAM" ADD CONSTRAINT "PK_TEAM" PRIMARY KEY ("TEAM_ID")
+  USING INDEX  ENABLE;
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 금요일-10월-20-2023   
+--------------------------------------------------------
+DROP TABLE "ITEM" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table ITEM
+--------------------------------------------------------
+
+  CREATE TABLE "ITEM" 
+   (	"ITEM_ID" NUMBER, 
+	"ITEM_TYPE" VARCHAR2(256), 
+	"ITEM_DATA" VARCHAR2(4000), 
+	"ITEM_NAME" VARCHAR2(256), 
+	"PRICE" NUMBER, 
+	"GAMEPRICE" NUMBER, 
+	"DISCOUNT_RATE" NUMBER
+   ) ;
+
+   COMMENT ON COLUMN "ITEM"."ITEM_ID" IS '아이템 ID';
+   COMMENT ON COLUMN "ITEM"."ITEM_TYPE" IS '아이템종류';
+   COMMENT ON COLUMN "ITEM"."ITEM_DATA" IS '아이템데이터';
+   COMMENT ON TABLE "ITEM"  IS '아이템';
+REM INSERTING into ITEM
+SET DEFINE OFF;
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (525,'HEALING',null,'Elixir Of Life',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (608,'HEALING',null,'Fertility Potion',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (613,'HEALING',null,'Purification Potion',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (614,'HEALING',null,'Sailor''s Stew',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (615,'HEALING',null,'Treasure Map',4500,45000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (625,'USABLE',null,'Seafood Plate',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (626,'USABLE',null,'Barbecue Plate',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (627,'USABLE',null,'Veggie Plate',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1000,'ARMOR',null,'Copper Necklace',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1001,'ARMOR',null,'Silver Necklace',2000,20000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1002,'ARMOR',null,'Gold Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1003,'ARMOR',null,'Platinum Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1004,'ARMOR',null,'Copper Four-Leaf Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1005,'ARMOR',null,'Silver Four-Leaf Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1006,'ARMOR',null,'Golden Four-Leaf Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1007,'ARMOR',null,'Platinum Four-Leaf Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1008,'ARMOR',null,'Tooth Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1009,'ARMOR',null,'Teeth Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1010,'ARMOR',null,'Barbarian Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1011,'ARMOR',null,'Heart Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1012,'ARMOR',null,'Mouboo Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1013,'ARMOR',null,'Skull Necklace',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1100,'ARMOR',null,'Simple Copper Ring',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1101,'ARMOR',null,'Simple Silver Ring',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1102,'ARMOR',null,'Simple Golden Ring',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1103,'ARMOR',null,'Simple Platinum Ring',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1104,'ARMOR',null,'Soul Ring',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1105,'ARMOR',null,'Copper Ring',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1106,'ARMOR',null,'Silver Ring',2000,20000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1107,'ARMOR',null,'Gold Ring',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1108,'ARMOR',null,'Platinum Ring',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1109,'ARMOR',null,'Copper Signet Ring',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1110,'ARMOR',null,'Silver Signet Ring',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1111,'ARMOR',null,'Gold Signet Ring',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1112,'ARMOR',null,'Platinum Signet Ring',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1200,'ARMOR',null,'Ancient Scroll',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1206,'ARMOR',null,'Flower Towel',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1307,'ARMOR',null,'Silk Robe',2900,35000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1309,'ARMOR',null,'Warlord Plate',7500,75000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1310,'ARMOR',null,'Legion''s Iron Armor',5500,55000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1311,'ARMOR',null,'Golden Warlord Plate',15000,150000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1322,'ARMOR',null,'Terranite Armor',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1802,'ARMOR',null,'Fur Boots',1200,12000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1803,'ARMOR',null,'Bandit Boots',1500,15000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1808,'ARMOR',null,'Warlord Boots',1200,12000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (1813,'ARMOR',null,'Golden Warlord Boots',11200,112000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2009,'ARMOR',null,'Silk Gloves',800,8000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2013,'ARMOR',null,'Mana Gloves',800,8000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2207,'ARMOR',null,'Assassin Pants',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2208,'ARMOR',null,'Chainmail Skirt',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2209,'ARMOR',null,'Pirate Shorts',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2210,'ARMOR',null,'Terranite Pants',1000,10000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2705,'ARMOR',null,'Blade Shield',500,5000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2706,'ARMOR',null,'Dragon Shield',500,5000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2908,'ARMOR',null,'Warlord Helmet',1350,13500,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2910,'ARMOR',null,'Pinkie Hat',1200,12600,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2911,'ARMOR',null,'Top Hat',5000,50000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2912,'ARMOR',null,'Bowler Hat',1700,17355,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2913,'ARMOR',null,'Fairy Hat',600,6300,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2914,'ARMOR',null,'Noh Mask',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2915,'ARMOR',null,'Rose Hat',1200,12000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2916,'ARMOR',null,'Bandit Hood',950,9560,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2918,'ARMOR',null,'Cat Ears',3500,37500,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2925,'ARMOR',null,'Bull Helmet',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2926,'ARMOR',null,'Bunny Ears',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2929,'ARMOR',null,'Silk Headband',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2933,'ARMOR',null,'Wizard Hat',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2934,'ARMOR',null,'Captain Hat',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2935,'ARMOR',null,'Ranger Hat',1500,15000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (2936,'ARMOR',null,'Knight Helmet',2500,25000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (3204,'ARMOR',null,'Heart Glasses',500,6500,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (3208,'ARMOR',null,'Beard',500,6500,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (3507,'WEAPON',null,'Scythe',10000,104800,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (3522,'WEAPON',null,'Long Sword',2000,20000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (3518,'WEAPON',null,'Cleaver',2000,20000,null);
+Insert into ITEM (ITEM_ID,ITEM_TYPE,ITEM_DATA,ITEM_NAME,PRICE,GAMEPRICE,DISCOUNT_RATE) values (3509,'WEAPON',null,'Setzer',2000,20000,null);
+--------------------------------------------------------
+--  DDL for Index PK_ITEM
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_ITEM" ON "ITEM" ("ITEM_ID");
+--------------------------------------------------------
+--  Constraints for Table ITEM
+--------------------------------------------------------
+
+  ALTER TABLE "ITEM" MODIFY ("ITEM_NAME" NOT NULL ENABLE);
+  ALTER TABLE "ITEM" MODIFY ("ITEM_ID" NOT NULL ENABLE);
+  ALTER TABLE "ITEM" ADD CONSTRAINT "PK_ITEM" PRIMARY KEY ("ITEM_ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "ITEM" MODIFY ("PRICE" NOT NULL ENABLE);
+  ALTER TABLE "ITEM" MODIFY ("GAMEPRICE" NOT NULL ENABLE);
+
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-10월-23-2023   
+--------------------------------------------------------
+DROP TABLE "EMPLOYEE" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table EMPLOYEE
+--------------------------------------------------------
+
+  CREATE TABLE "EMPLOYEE" 
+   (	"EMPLOYEE_ID" RAW(16) DEFAULT sys_guid(), 
+	"DEPARTMENT_ID" VARCHAR2(32), 
+	"TEAM_ID" VARCHAR2(32), 
+	"RANK_ID" VARCHAR2(32), 
+	"EMPLOYEE_NAME" VARCHAR2(100), 
+	"EMPLOYEE_EMAIL" VARCHAR2(100), 
+	"EMPLOYEE_PWD" VARCHAR2(100), 
+	"EMPLOYEE_ADDRESS" VARCHAR2(1000), 
+	"EMPLOYEE_PHONE" VARCHAR2(20), 
+	"EMPLOYEE_BIRTHDATE" DATE, 
+	"MANAGER_ID" RAW(16)
+   ) ;
+
+   COMMENT ON COLUMN "EMPLOYEE"."EMPLOYEE_ID" IS '사원 ID';
+   COMMENT ON COLUMN "EMPLOYEE"."DEPARTMENT_ID" IS '부서 ID';
+   COMMENT ON COLUMN "EMPLOYEE"."TEAM_ID" IS '팀 ID';
+   COMMENT ON COLUMN "EMPLOYEE"."RANK_ID" IS '직급 ID';
+   COMMENT ON COLUMN "EMPLOYEE"."EMPLOYEE_NAME" IS '이름';
+   COMMENT ON COLUMN "EMPLOYEE"."EMPLOYEE_EMAIL" IS '이메일';
+   COMMENT ON COLUMN "EMPLOYEE"."EMPLOYEE_PWD" IS '비밀번호';
+   COMMENT ON COLUMN "EMPLOYEE"."EMPLOYEE_ADDRESS" IS '주소';
+   COMMENT ON COLUMN "EMPLOYEE"."EMPLOYEE_PHONE" IS '전화번호';
+   COMMENT ON COLUMN "EMPLOYEE"."EMPLOYEE_BIRTHDATE" IS '주민등록번호';
+   COMMENT ON COLUMN "EMPLOYEE"."MANAGER_ID" IS '관리자 ID';
+   COMMENT ON TABLE "EMPLOYEE"  IS '사원';
+REM INSERTING into EMPLOYEE
+SET DEFINE OFF;
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('E37B3B8A4FF54582A91A8DDBD0D64665','dev','backend','emp','안태환','tatha000@naver.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),null);
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('EFB0DB0DFACD4157AEA35C89493C8E00','dev','backend','emp','김지혁','kimjihyuk5935@gmail.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),null);
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp','오상민','osm1525@naver.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),null);
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('62D1E4B981A54F48BB21643C9D18F00B','dev','backend','emp','김화범','kazz9000@gmail.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),null);
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('60306CD091E142B08E1FAEC717AE435F','dev','backend','emp','최유미','rarayo44@gmail.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),null);
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('6B67DD76E5264FF6875E1F4C3D6100A8','dev','backend','sman','호랑이','admin1@admin.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),null);
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('368B441925894A31BE87654AE90A1949','dev','backend','emp','한창현','zxcqwgks@kakao.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),null);
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('7D633633196C4E95A43A9E0AE2390E8B','dev','backend','jman','피카츄','admin3@admin.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),'6B67DD76E5264FF6875E1F4C3D6100A8');
+Insert into EMPLOYEE (EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,EMPLOYEE_NAME,EMPLOYEE_EMAIL,EMPLOYEE_PWD,EMPLOYEE_ADDRESS,EMPLOYEE_PHONE,EMPLOYEE_BIRTHDATE,MANAGER_ID) values ('4607A3F718DC4090B20177DC270676A1','dev','backend','senior','김대리','admin2@admin.com','$2a$10$Y2xh9EkVjqsSPEjU0EaDeODW7oVFyQ/hrEhCTbWEWh/W2G5DwIcYu','서울','010-1234-5678',to_date('23/10/20','RR/MM/DD'),'7D633633196C4E95A43A9E0AE2390E8B');
+--------------------------------------------------------
+--  DDL for Index PK_EMPLOYEE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_EMPLOYEE" ON "EMPLOYEE" ("EMPLOYEE_ID");
+--------------------------------------------------------
+--  DDL for Index UIX_EMPLOYEE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "UIX_EMPLOYEE" ON "EMPLOYEE" ("EMPLOYEE_EMAIL", "EMPLOYEE_PHONE");
+--------------------------------------------------------
+--  Constraints for Table EMPLOYEE
+--------------------------------------------------------
+
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_ID" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("DEPARTMENT_ID" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("TEAM_ID" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("RANK_ID" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_NAME" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_PWD" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_ADDRESS" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_PHONE" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" MODIFY ("EMPLOYEE_BIRTHDATE" NOT NULL ENABLE);
+  ALTER TABLE "EMPLOYEE" ADD CONSTRAINT "PK_EMPLOYEE" PRIMARY KEY ("EMPLOYEE_ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "EMPLOYEE" ADD CONSTRAINT "UK_EMPLOYEE" UNIQUE ("EMPLOYEE_EMAIL", "EMPLOYEE_PHONE")
+  USING INDEX (CREATE UNIQUE INDEX "UIX_EMPLOYEE" ON "EMPLOYEE" ("EMPLOYEE_EMAIL", "EMPLOYEE_PHONE") 
+  )  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table EMPLOYEE
+--------------------------------------------------------
+
+  ALTER TABLE "EMPLOYEE" ADD CONSTRAINT "FK_TEAM_TO_EMPLOYEE" FOREIGN KEY ("TEAM_ID")
+	  REFERENCES "TEAM" ("TEAM_ID") ENABLE;
+  ALTER TABLE "EMPLOYEE" ADD CONSTRAINT "FK_DEPARTMENT_TO_EMPLOYEE" FOREIGN KEY ("DEPARTMENT_ID")
+	  REFERENCES "DEPARTMENT" ("DEPARTMENT_ID") ENABLE;
+  ALTER TABLE "EMPLOYEE" ADD CONSTRAINT "FK_RANK_TO_EMPLOYEE" FOREIGN KEY ("RANK_ID")
+	  REFERENCES "RANK" ("RANK_ID") ENABLE;
+
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-10월-23-2023   
+--------------------------------------------------------
+DROP TABLE "NOTICE" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table NOTICE
+--------------------------------------------------------
+
+  CREATE TABLE "NOTICE" 
+   (	"NOTICE_ID" RAW(16) DEFAULT sys_guid(), 
+	"EMPLOYEE_ID" RAW(16) DEFAULT sys_guid(), 
+	"DEPARTMENT_ID" VARCHAR2(32), 
+	"TEAM_ID" VARCHAR2(32), 
+	"NOTICE_TITLE" VARCHAR2(1000), 
+	"NOTICE_CONTENT" VARCHAR2(4000), 
+	"EDIT_DATE" DATE, 
+	"ATTACHEMENT_FILENAME" VARCHAR2(1000), 
+	"READ_COUNT" NUMBER DEFAULT 0, 
+	"RENAME_FILENAME" VARCHAR2(1000)
+   ) ;
+
+   COMMENT ON COLUMN "NOTICE"."NOTICE_ID" IS '공지사항 ID';
+   COMMENT ON COLUMN "NOTICE"."EMPLOYEE_ID" IS '작성자 ID';
+   COMMENT ON COLUMN "NOTICE"."DEPARTMENT_ID" IS '부서 ID';
+   COMMENT ON COLUMN "NOTICE"."TEAM_ID" IS '팀 ID';
+   COMMENT ON COLUMN "NOTICE"."NOTICE_TITLE" IS '제목';
+   COMMENT ON COLUMN "NOTICE"."NOTICE_CONTENT" IS '본문';
+   COMMENT ON COLUMN "NOTICE"."EDIT_DATE" IS '날짜';
+   COMMENT ON COLUMN "NOTICE"."ATTACHEMENT_FILENAME" IS '첨부파일';
+   COMMENT ON COLUMN "NOTICE"."READ_COUNT" IS '조회수';
+   COMMENT ON COLUMN "NOTICE"."RENAME_FILENAME" IS '변경첨부파일명';
+   COMMENT ON TABLE "NOTICE"  IS '공지사항';
+
+--------------------------------------------------------
+--  DDL for Index PK_NOTICE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_NOTICE" ON "NOTICE" ("NOTICE_ID");
+--------------------------------------------------------
+--  Constraints for Table NOTICE
+--------------------------------------------------------
+
+  ALTER TABLE "NOTICE" MODIFY ("NOTICE_ID" NOT NULL ENABLE);
+  ALTER TABLE "NOTICE" MODIFY ("EMPLOYEE_ID" NOT NULL ENABLE);
+  ALTER TABLE "NOTICE" MODIFY ("NOTICE_TITLE" NOT NULL ENABLE);
+  ALTER TABLE "NOTICE" MODIFY ("NOTICE_CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "NOTICE" MODIFY ("EDIT_DATE" NOT NULL ENABLE);
+  ALTER TABLE "NOTICE" MODIFY ("READ_COUNT" NOT NULL ENABLE);
+  ALTER TABLE "NOTICE" ADD CONSTRAINT "PK_NOTICE" PRIMARY KEY ("NOTICE_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------;
+--  Ref Constraints for Table NOTICE
+--------------------------------------------------------
+
+  ALTER TABLE "NOTICE" ADD CONSTRAINT "FK_EMPLOYEE_TO_NOTICE" FOREIGN KEY ("EMPLOYEE_ID")
+	  REFERENCES "EMPLOYEE" ("EMPLOYEE_ID") ENABLE;
+  ALTER TABLE "NOTICE" ADD CONSTRAINT "FK_DEPARTMENT_TO_NOTICE" FOREIGN KEY ("DEPARTMENT_ID")
+	  REFERENCES "DEPARTMENT" ("DEPARTMENT_ID") ENABLE;
+  ALTER TABLE "NOTICE" ADD CONSTRAINT "FK_TEAM_TO_NOTICE" FOREIGN KEY ("TEAM_ID")
+	  REFERENCES "TEAM" ("TEAM_ID") ENABLE;
+
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-10월-25-2023   
+--------------------------------------------------------
+DROP TABLE "COMMUNITY" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table COMMUNITY
+--------------------------------------------------------
+
+  CREATE TABLE "COMMUNITY" 
+   (	"BOARD_ID" RAW(16) DEFAULT sys_guid(), 
+	"DEPARTMENT_ID" VARCHAR2(32), 
+	"EMPLOYEE_ID" RAW(16) DEFAULT sys_guid(), 
+	"BOARD_TITLE" VARCHAR2(4000), 
+	"BOARD_DATE" DATE DEFAULT sysdate, 
+	"ATTACHEMENT_FILENAME" VARCHAR2(1000), 
+	"BOARD_TYPE" VARCHAR2(1) DEFAULT 'b', 
+	"READ_COUNT" NUMBER, 
+	"REF_ID" RAW(16), 
+	"BOARD_BODY" CLOB, 
+	"TEAM_ID" VARCHAR2(32), 
+	"REFYN" VARCHAR2(1) DEFAULT 'n', 
+	"DELYN" VARCHAR2(1) DEFAULT 'n'
+   ) ;
+
+   COMMENT ON COLUMN "COMMUNITY"."BOARD_ID" IS '게시글 ID';
+   COMMENT ON COLUMN "COMMUNITY"."DEPARTMENT_ID" IS '부서 ID';
+   COMMENT ON COLUMN "COMMUNITY"."EMPLOYEE_ID" IS '작성자 ID';
+   COMMENT ON COLUMN "COMMUNITY"."BOARD_TITLE" IS '제목';
+   COMMENT ON COLUMN "COMMUNITY"."BOARD_DATE" IS '날짜';
+   COMMENT ON COLUMN "COMMUNITY"."ATTACHEMENT_FILENAME" IS '첨부파일';
+   COMMENT ON COLUMN "COMMUNITY"."BOARD_TYPE" IS '게시판 분류';
+   COMMENT ON COLUMN "COMMUNITY"."READ_COUNT" IS '조회수';
+   COMMENT ON COLUMN "COMMUNITY"."REF_ID" IS '원글 레퍼런스';
+   COMMENT ON COLUMN "COMMUNITY"."BOARD_BODY" IS '본문(clob)';
+   COMMENT ON TABLE "COMMUNITY"  IS '게시글';
+REM INSERTING into COMMUNITY
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index PK_COMMUNITY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_COMMUNITY" ON "COMMUNITY" ("BOARD_ID") 
+  ;
+--------------------------------------------------------
+--  Constraints for Table COMMUNITY
+--------------------------------------------------------
+
+  ALTER TABLE "COMMUNITY" MODIFY ("BOARD_ID" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" MODIFY ("DEPARTMENT_ID" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" MODIFY ("EMPLOYEE_ID" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" MODIFY ("BOARD_TITLE" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" MODIFY ("BOARD_DATE" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" MODIFY ("BOARD_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" MODIFY ("READ_COUNT" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" ADD CONSTRAINT "PK_COMMUNITY" PRIMARY KEY ("BOARD_ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "COMMUNITY" MODIFY ("REFYN" NOT NULL ENABLE);
+  ALTER TABLE "COMMUNITY" MODIFY ("DELYN" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table COMMUNITY
+--------------------------------------------------------
+
+  ALTER TABLE "COMMUNITY" ADD CONSTRAINT "FK_EMPLOYEE_TO_COMMUNITY" FOREIGN KEY ("EMPLOYEE_ID")
+	  REFERENCES "EMPLOYEE" ("EMPLOYEE_ID") ENABLE;
+  ALTER TABLE "COMMUNITY" ADD CONSTRAINT "FK_DEPARTMENT_TO_COMMUNITY" FOREIGN KEY ("DEPARTMENT_ID")
+	  REFERENCES "DEPARTMENT" ("DEPARTMENT_ID") ENABLE;
+  ALTER TABLE "COMMUNITY" ADD FOREIGN KEY ("REF_ID")
+	  REFERENCES "COMMUNITY" ("BOARD_ID") ENABLE;
+  ALTER TABLE "COMMUNITY" ADD FOREIGN KEY ("TEAM_ID")
+	  REFERENCES "TEAM" ("TEAM_ID") ENABLE;
+
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-10월-23-2023   
+--------------------------------------------------------
+DROP TABLE "PAYMENT" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table PAYMENT
+--------------------------------------------------------
+
+  CREATE TABLE "PAYMENT" 
+   (	"PAYMENT_ID" RAW(16) DEFAULT sys_guid(), 
+	"ITEM_ID" NUMBER, 
+	"CHAR_ID" NUMBER, 
+	"ACCOUNT_ID" NUMBER, 
+	"AMOUNT" NUMBER, 
+	"PAYMENT_DATE" DATE DEFAULT SYSDATE, 
+	"PAYMENT_STATUS" VARCHAR2(50) DEFAULT NULL, 
+	"REFUND_DATE" DATE, 
+	"REFUND_CAUSE" VARCHAR2(1000), 
+	"CHAR_NAME" VARCHAR2(30), 
+	"PAYMENT_KEY" VARCHAR2(50), 
+	"UNIQUE_ID" NUMBER, 
+	"EMAIL_STATUS" VARCHAR2(1) DEFAULT 'N'
+   ) ;
+
+   COMMENT ON COLUMN "PAYMENT"."PAYMENT_ID" IS '결제 ID';
+   COMMENT ON COLUMN "PAYMENT"."ITEM_ID" IS '아이템 ID';
+   COMMENT ON COLUMN "PAYMENT"."CHAR_ID" IS '캐릭터 ID';
+   COMMENT ON COLUMN "PAYMENT"."ACCOUNT_ID" IS '유저 ID';
+   COMMENT ON COLUMN "PAYMENT"."AMOUNT" IS '가격';
+   COMMENT ON COLUMN "PAYMENT"."PAYMENT_DATE" IS '결제 시간';
+   COMMENT ON COLUMN "PAYMENT"."PAYMENT_STATUS" IS '결제 상태';
+   COMMENT ON COLUMN "PAYMENT"."REFUND_DATE" IS '환불 날짜';
+   COMMENT ON COLUMN "PAYMENT"."REFUND_CAUSE" IS '환불 사유';
+   COMMENT ON COLUMN "PAYMENT"."CHAR_NAME" IS '캐릭터이름';
+   COMMENT ON COLUMN "PAYMENT"."PAYMENT_KEY" IS '페이먼트키';
+   COMMENT ON COLUMN "PAYMENT"."UNIQUE_ID" IS '아이템고유번호';
+   COMMENT ON COLUMN "PAYMENT"."EMAIL_STATUS" IS '이메일확인상태(Y or N)';
+   COMMENT ON TABLE "PAYMENT"  IS '유저 결제 내역';
+--------------------------------------------------------
+--  DDL for Index PK_PAYMENT
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_PAYMENT" ON "PAYMENT" ("PAYMENT_ID");
+--------------------------------------------------------
+--  Constraints for Table PAYMENT
+--------------------------------------------------------
+
+  ALTER TABLE "PAYMENT" MODIFY ("PAYMENT_ID" NOT NULL ENABLE);
+  ALTER TABLE "PAYMENT" MODIFY ("CHAR_ID" NOT NULL ENABLE);
+  ALTER TABLE "PAYMENT" MODIFY ("ACCOUNT_ID" NOT NULL ENABLE);
+  ALTER TABLE "PAYMENT" MODIFY ("AMOUNT" NOT NULL ENABLE);
+  ALTER TABLE "PAYMENT" MODIFY ("PAYMENT_DATE" NOT NULL ENABLE);
+  ALTER TABLE "PAYMENT" MODIFY ("UNIQUE_ID" NOT NULL ENABLE);
+  ALTER TABLE "PAYMENT" ADD CONSTRAINT "PK_PAYMENT" PRIMARY KEY ("PAYMENT_ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "PAYMENT" MODIFY ("EMAIL_STATUS" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table PAYMENT
+--------------------------------------------------------
+
+  ALTER TABLE "PAYMENT" ADD CONSTRAINT "FK_ITEM_TO_PAYMENT" FOREIGN KEY ("ITEM_ID")
+	  REFERENCES "ITEM" ("ITEM_ID") ENABLE;
+
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-10월-23-2023   
+--------------------------------------------------------
+DROP TABLE "CASE" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table CASE
+--------------------------------------------------------
+
+  CREATE TABLE "CASE" 
+   (	"CASE_ID" RAW(16) DEFAULT SYS_GUID(), 
+	"CASE_TITLE" VARCHAR2(100), 
+	"CASE_CONTENT" VARCHAR2(4000), 
+	"CASE_WRITER_ID" RAW(16), 
+	"CASE_WRITER_NAME" VARCHAR2(100), 
+	"CASE_TYPE" VARCHAR2(1), 
+	"CASE_MANAGER_ID" RAW(16), 
+	"CASE_MANAGER_NAME" VARCHAR2(100), 
+	"CASE_STATUS" VARCHAR2(1) DEFAULT '0', 
+	"EDIT_DATE" DATE DEFAULT SYSDATE, 
+	"SIGN_DATE" DATE DEFAULT NULL, 
+	"ATTACHMENT_FILENAME" VARCHAR2(1000), 
+	"CHAR_ID" NUMBER, 
+	"CHAR_NAME" VARCHAR2(30), 
+	"ACCOUNT_ID" NUMBER, 
+	"ORIGINAL_ITEM_ID" NUMBER, 
+	"ORIGINAL_ITEM_NAME" VARCHAR2(300), 
+	"ORIGINAL_ITEM_AMOUNT" NUMBER, 
+	"UNIQUE_ID" NUMBER, 
+	"NEW_ITEM_ID" NUMBER, 
+	"NEW_ITEM_NAME" VARCHAR2(300), 
+	"NEW_ITEM_AMOUNT" NUMBER, 
+	"PAYMENT_DATE" DATE DEFAULT NULL, 
+	"PAYMENT_STATUS" VARCHAR2(1), 
+	"PAYMENT_AMOUNT" NUMBER, 
+	"REFUND_DATE" DATE DEFAULT NULL, 
+	"REFUND_CAUSE" VARCHAR2(1000), 
+	"PAYMENT_KEY" VARCHAR2(50)
+   );
+REM INSERTING into CASE
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index SYS_C009833
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "SYS_C009833" ON "CASE" ("CASE_ID");
+--------------------------------------------------------
+--  Constraints for Table CASE
+--------------------------------------------------------
+
+  ALTER TABLE "CASE" MODIFY ("CASE_TITLE" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CASE_CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CASE_WRITER_ID" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CASE_WRITER_NAME" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CASE_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CASE_MANAGER_ID" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CASE_MANAGER_NAME" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CASE_STATUS" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("EDIT_DATE" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CHAR_ID" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("CHAR_NAME" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("ACCOUNT_ID" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("ORIGINAL_ITEM_ID" NOT NULL ENABLE);
+  ALTER TABLE "CASE" MODIFY ("ORIGINAL_ITEM_NAME" NOT NULL ENABLE);
+  ALTER TABLE "CASE" ADD PRIMARY KEY ("CASE_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table CASE
+--------------------------------------------------------
+
+  ALTER TABLE CASE ADD FOREIGN KEY (CASE_WRITER_ID)
+	  REFERENCES EMPLOYEE (EMPLOYEE_ID) ENABLE;
+  ALTER TABLE "CASE" ADD FOREIGN KEY ("CASE_MANAGER_ID")
+	  REFERENCES "EMPLOYEE" ("EMPLOYEE_ID") ENABLE;
+
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 월요일-10월-23-2023   
+--------------------------------------------------------
+DROP TABLE "INQUIRY" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table INQUIRY
+--------------------------------------------------------
+
+  CREATE TABLE "INQUIRY" 
+   (	"INQUIRY_ID" RAW(16) DEFAULT sys_guid(), 
+	"USERID" VARCHAR2(23), 
+	"EMPLOYEE_ID" RAW(16), 
+	"INQUIRY_TITLE" VARCHAR2(50), 
+	"INQUIRY_CONTENT" VARCHAR2(1000), 
+	"ANSWER_STATUS" VARCHAR2(1) DEFAULT 'N', 
+	"EDIT_DATE" DATE, 
+	"ANSWER_DATE" DATE, 
+	"ANSWER_CONTENT" VARCHAR2(1000), 
+	"ATTACHEMENT_FILENAME" VARCHAR2(50), 
+	"INQUIRY_TYPE" VARCHAR2(1), 
+	"EMP_NAME" VARCHAR2(30) DEFAULT NULL, 
+	"MODIFY_DATE" DATE DEFAULT NULL
+   ) ;
+
+   COMMENT ON COLUMN "INQUIRY"."INQUIRY_ID" IS '문의 ID';
+   COMMENT ON COLUMN "INQUIRY"."USERID" IS '유저 ID';
+   COMMENT ON COLUMN "INQUIRY"."EMPLOYEE_ID" IS '사원 ID';
+   COMMENT ON COLUMN "INQUIRY"."INQUIRY_TITLE" IS '문의 제목';
+   COMMENT ON COLUMN "INQUIRY"."INQUIRY_CONTENT" IS '문의 내용';
+   COMMENT ON COLUMN "INQUIRY"."ANSWER_STATUS" IS '답변여부(Y or N)';
+   COMMENT ON COLUMN "INQUIRY"."EDIT_DATE" IS '문의작성날짜';
+   COMMENT ON COLUMN "INQUIRY"."ANSWER_DATE" IS '문의답변날짜';
+   COMMENT ON COLUMN "INQUIRY"."ANSWER_CONTENT" IS '문의답변내용';
+   COMMENT ON COLUMN "INQUIRY"."ATTACHEMENT_FILENAME" IS '첨부파일';
+   COMMENT ON COLUMN "INQUIRY"."INQUIRY_TYPE" IS '문의종류';
+   COMMENT ON COLUMN "INQUIRY"."EMP_NAME" IS '문의 답변 사원 이름';
+   COMMENT ON TABLE "INQUIRY"  IS '유저 문의';
+--------------------------------------------------------
+--  DDL for Index PK_INQUIRY
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_INQUIRY" ON "INQUIRY" ("INQUIRY_ID");
+--------------------------------------------------------
+--  Constraints for Table INQUIRY
+--------------------------------------------------------
+
+  ALTER TABLE "INQUIRY" MODIFY ("INQUIRY_TITLE" NOT NULL ENABLE);
+  ALTER TABLE "INQUIRY" MODIFY ("INQUIRY_CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "INQUIRY" MODIFY ("ANSWER_STATUS" NOT NULL ENABLE);
+  ALTER TABLE "INQUIRY" MODIFY ("EDIT_DATE" NOT NULL ENABLE);
+  ALTER TABLE "INQUIRY" MODIFY ("INQUIRY_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "INQUIRY" ADD CONSTRAINT "PK_INQUIRY" PRIMARY KEY ("INQUIRY_ID")
+  USING INDEX  ENABLE;
+  ALTER TABLE "INQUIRY" MODIFY ("INQUIRY_ID" NOT NULL ENABLE);
+  ALTER TABLE "INQUIRY" MODIFY ("USERID" NOT NULL ENABLE);
+
+
+/* 일정 */
+DROP TABLE SCHEDULE 
+	CASCADE CONSTRAINTS;
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-10월-25-2023   
+--------------------------------------------------------
+DROP TABLE "EMAIL_CHECK" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table EMAIL_CHECK
+--------------------------------------------------------
+
+  CREATE TABLE "EMAIL_CHECK" 
+   (	"CHECK_ID" RAW(16) DEFAULT SYS_GUID(), 
+	"TO_EMAIL" VARCHAR2(256), 
+	"CODE" VARCHAR2(256), 
+	"CHECK_DATE" DATE DEFAULT SYSDATE
+   ) ;
+REM INSERTING into EMAIL_CHECK
+SET DEFINE OFF;
+--------------------------------------------------------
+--  Constraints for Table EMAIL_CHECK
+--------------------------------------------------------
+
+  ALTER TABLE "EMAIL_CHECK" MODIFY ("CHECK_ID" NOT NULL ENABLE);
+  ALTER TABLE "EMAIL_CHECK" MODIFY ("TO_EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "EMAIL_CHECK" MODIFY ("CODE" NOT NULL ENABLE);
+  ALTER TABLE "EMAIL_CHECK" MODIFY ("CHECK_DATE" NOT NULL ENABLE);
+
+
+
+--------------------------------------------------------
+--  파일이 생성됨 - 수요일-10월-25-2023   
+--------------------------------------------------------
+DROP TABLE "SCHEDULE" cascade constraints;
+--------------------------------------------------------
+--  DDL for Table SCHEDULE
+--------------------------------------------------------
+
+  CREATE TABLE "SCHEDULE" 
+   (	"SCHEDULE_ID" RAW(16) DEFAULT sys_guid(), 
+	"EMPLOYEE_ID" RAW(16) DEFAULT sys_guid(), 
+	"DEPARTMENT_ID" VARCHAR2(32), 
+	"TEAM_ID" VARCHAR2(32), 
+	"RANK_ID" VARCHAR2(32), 
+	"SCHEDULE_STARTDAY" DATE, 
+	"SCHEDULE_ENDDAY" DATE, 
+	"SCHEDULE_TYPE" VARCHAR2(32), 
+	"SCHEDULE_ADDRESS" VARCHAR2(1000), 
+	"SCHEDULE_THEME" VARCHAR2(1000), 
+	"SCHEDULE_CONTENT" VARCHAR2(4000)
+   ) ;
+
+   COMMENT ON COLUMN "SCHEDULE"."SCHEDULE_ID" IS '일정ID';
+   COMMENT ON COLUMN "SCHEDULE"."EMPLOYEE_ID" IS '사원 ID';
+   COMMENT ON COLUMN "SCHEDULE"."DEPARTMENT_ID" IS '부서 ID';
+   COMMENT ON COLUMN "SCHEDULE"."TEAM_ID" IS '팀 ID';
+   COMMENT ON COLUMN "SCHEDULE"."RANK_ID" IS '직급 ID';
+   COMMENT ON COLUMN "SCHEDULE"."SCHEDULE_STARTDAY" IS '시작날짜';
+   COMMENT ON COLUMN "SCHEDULE"."SCHEDULE_ENDDAY" IS '끝날짜';
+   COMMENT ON COLUMN "SCHEDULE"."SCHEDULE_TYPE" IS '구분';
+   COMMENT ON COLUMN "SCHEDULE"."SCHEDULE_THEME" IS '주제';
+   COMMENT ON COLUMN "SCHEDULE"."SCHEDULE_CONTENT" IS '내용';
+   COMMENT ON TABLE "SCHEDULE"  IS '일정';
+REM INSERTING into SCHEDULE
+SET DEFINE OFF;
+--------------------------------------------------------
+--  DDL for Index PK_SCHEDULE
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "PK_SCHEDULE" ON "SCHEDULE" ("SCHEDULE_ID") 
+  ;
+--------------------------------------------------------
+--  Constraints for Table SCHEDULE
+--------------------------------------------------------
+
+  ALTER TABLE "SCHEDULE" MODIFY ("SCHEDULE_ID" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" MODIFY ("EMPLOYEE_ID" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" MODIFY ("RANK_ID" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" MODIFY ("SCHEDULE_STARTDAY" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" MODIFY ("SCHEDULE_ENDDAY" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" MODIFY ("SCHEDULE_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" MODIFY ("SCHEDULE_THEME" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" MODIFY ("SCHEDULE_CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "SCHEDULE" ADD CONSTRAINT "PK_SCHEDULE" PRIMARY KEY ("SCHEDULE_ID")
+  USING INDEX  ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table SCHEDULE
+--------------------------------------------------------
+
+  ALTER TABLE "SCHEDULE" ADD CONSTRAINT "FK_EMPLOYEE_TO_SCHEDULE" FOREIGN KEY ("EMPLOYEE_ID")
+	  REFERENCES "EMPLOYEE" ("EMPLOYEE_ID") ENABLE;
+  ALTER TABLE "SCHEDULE" ADD CONSTRAINT "FK_DEPARTMENT_TO_SCHEDULE" FOREIGN KEY ("DEPARTMENT_ID")
+	  REFERENCES "DEPARTMENT" ("DEPARTMENT_ID") ENABLE;
+  ALTER TABLE "SCHEDULE" ADD CONSTRAINT "FK_TEAM_TO_SCHEDULE" FOREIGN KEY ("TEAM_ID")
+	  REFERENCES "TEAM" ("TEAM_ID") ENABLE;
+  ALTER TABLE "SCHEDULE" ADD CONSTRAINT "FK_RANK_TO_SCHEDULE" FOREIGN KEY ("RANK_ID")
+	  REFERENCES "RANK" ("RANK_ID") ENABLE;
+
+
+-- dbscript\\tour_table.sql
+-- 동적 웹 크롤링에서 여행지 검색 결과 저장용 테이블 생성 스크립트
+
+DROP TABLE TOUR CASCADE CONSTRAINTS;
+
+CREATE TABLE TOUR (
+  --  RANK    VARCHAR2(10),
+    NAME    VARCHAR2(1000),
+    DESCRIPTION  NUMBER,
+    META    NUMBER
+);
+
+--COMMENT ON COLUMN TOUR.RANK IS '순위';
+COMMENT ON COLUMN TOUR.NAME IS '게임 이름';
+COMMENT ON COLUMN TOUR.DESCRIPTION IS '현재 플레이어';
+COMMENT ON COLUMN TOUR.META IS '동시 접속자';
+
+commit;
+
+
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('F8DE057D4A324848B607ECA998E1CFDA',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','333','<p>222</p>',to_date('23/10/19','RR/MM/DD'),null,7,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('7AF6FAA942DC48CC9F7D5EB8F1D81077',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','12345','<p>12345</p>',to_date('23/10/19','RR/MM/DD'),null,5,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('8A6A8F9ACE3B430A806E73FECC6DEFA9',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','333123','<p>222123</p>',to_date('23/10/19','RR/MM/DD'),null,36,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('A3AF871283464B7C97A5CE1190BD2FD2',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','팀공','<p>ㅇㅇ</p>',to_date('23/10/19','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('148777813FFB4A00BD6D6648B229A5B4',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','333312123','<p>22223123123</p>',to_date('23/10/19','RR/MM/DD'),null,12,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('852D3291AEA54327AB4FF9B8573A17A5',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','rr','<p>rrr</p>',to_date('23/10/19','RR/MM/DD'),null,3,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('46E3F0430E63424AA22B0838C48C61A6',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','ㄱㄱ','<p>2233</p>',to_date('23/10/19','RR/MM/DD'),null,20,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('7D2D52847542414884304D55F87EB7EF',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123','<p>123</p>',to_date('23/10/19','RR/MM/DD'),null,19,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('B1ABEFE11F5F47D7B8359285086151BB',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123','<p>123</p>',to_date('23/10/19','RR/MM/DD'),null,18,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('AA13E7CF8BEF4740A17A1784EB13995B',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','xxx','<p>333</p>',to_date('23/10/19','RR/MM/DD'),null,19,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('807202A258F64CA194B9B87E4CC2B375',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','4124','3123',to_date('23/10/17','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('F577BD027D484DBB831E95D147E6DB81',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','142','4124',to_date('23/10/17','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('1E534479672B41B6A7DD108278880DB5',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','33','333',to_date('23/10/17','RR/MM/DD'),null,8,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('414A9FBF80724BF0891A7DAFF8DBCCC8',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','888','***',to_date('23/10/17','RR/MM/DD'),null,2,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('5CD69EB712F7474C828E21B378530675',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','789748','887944',to_date('23/10/17','RR/MM/DD'),null,7,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('A59B349B21D341F88D1F42D8D2F1356F',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','공지 등록','1111',to_date('23/10/17','RR/MM/DD'),'apidocs_경로.txt',2,'20231017194840');
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('173254782EAD477EB58047277C9CDDC7',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','333','<p>444</p>',to_date('23/10/20','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('C661FE55E2A3415FBD10A5C4A4325728',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','3124124','3123',to_date('23/10/17','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('7FF074DC774848E6ADF4E208D84D9B1B',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','124','321',to_date('23/10/17','RR/MM/DD'),null,2,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('1CF70696ADB043B0BD9D0DB9EA885991',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','4124124','3123',to_date('23/10/17','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('66CDB28C291946858436BB8F693F9947',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','새 글 등록입니다 ','111',to_date('23/10/17','RR/MM/DD'),null,7,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('BA2429EDC3E04840AE8F25D646B2A66C',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123','<p>123</p>',to_date('23/10/20','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('41A51BF21EC245F7814544156D3717C4',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','111','<p>123124</p>',to_date('23/10/20','RR/MM/DD'),null,2,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('0F0BF1E1D75D4A92AC9BC7CD8E9545EB',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','1515151','<p>3213</p>',to_date('23/10/20','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('40616B779D5D4D39B094F1B5DA5C887B',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123','<p>1524</p>',to_date('23/10/20','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('1E827949FE70420DBC245F49170E3847',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','첫번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('36D3739D716F41E6B22338747EB898CF',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','5번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('EC2C049398A5427B88F9AFC1044020A7',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','두번째 공지 테스트입니다.31','본문 테스트입니다.23',to_date('23/10/17','RR/MM/DD'),'apidocs_경로.txt',32,'20231017191734');
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('CFD7C1DCB8E34C7BBB18A0BD75817E78',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','3번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,22,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('93A1AC3458CE4CD7B82FDE9D689EAC0B',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','두번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,13,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('AD92873F02284297AFBF8FA883356DDF',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','4번째 공지 테스트입니다.4','본문 테스트입니다.',to_date('23/10/17','RR/MM/DD'),null,14,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('2B638FD4B1334FC2AB881428462F5615',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','5번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,2,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('9DD4CA611199418A800D32A7AE539C1F',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','10번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,2,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('15F5BCE4D2614200838FEB5FB4C070DA',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','10번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('A8903163A8EA46328BF6F24442E3AC7B',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','10번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,4,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('8115340005494971B607484BA0DF643E',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','42410번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('AC338347244E40EC875137D13F65DBAC',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','10번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,3,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('7FCC7620540C4EFB8B21E80D410FEE91',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','33412310번째 공지 테스트입니다.','333본문3 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('47506B7A01FC4E018F366C0FF3B1F282',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','444','222',to_date('23/10/17','RR/MM/DD'),null,7,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('0BA50E9D3E27484FA4A5464BD1CF4227',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','10번째3123 공지 테스트입니다.','<p>본문 테312스트입니다.</p>',to_date('23/10/19','RR/MM/DD'),null,7,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('2C8267378FFF40FF9B2E8469B5D6BFBD',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','10번째 공지 테스트입니다.','본3123문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('1AEC5CFA99524D45B019F54ADD853288',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','10번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('31F0D8A4D25F46F2ABA2DBF9CEA8F55A',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','101번째 공지 테스트입니다.','본문 테스트입니다.',to_date('23/10/16','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('4D64629CC68F41B4B3DA006E48D5B704',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','55','										95656',to_date('23/10/17','RR/MM/DD'),'공지사항 삽입 쿼리문.txt',2,'20231017194213');
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('81C1A2DA073F4966ACF01398C6CF7437',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','3123333555123','<p style="text-align: left;">1231233123444222123</p>',to_date('23/10/19','RR/MM/DD'),null,36,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('0176692C8DC14A61A45B9B5633BF3CA5',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','3123','<p>123123</p>',to_date('23/10/19','RR/MM/DD'),null,6,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('E376FA7273AD4A5198A5F1F7EEF94CA8',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','3123','<p>123213</p>',to_date('23/10/18','RR/MM/DD'),null,2,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('57EA122954334ABB80823C7DCD6FD3A3',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','312312332331232323234433312323','<p>123123 23322332323122233123</p>',to_date('23/10/19','RR/MM/DD'),null,100,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('0EE8DC48F28B4E3AB4184FC976DF8E7F',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','다시333','<p><strong>ㄱㄱㄱ</strong></p>',to_date('23/10/19','RR/MM/DD'),null,19,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('6BC62B034A4046F1992118D8EB5307D5',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123','<p>123</p>',to_date('23/10/19','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('60B8AA4F7D76413C989A568B0B839563',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123','<p>123</p>',to_date('23/10/19','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('2EE27C62B2AB4BAE940D73B321E698A1',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123123','<p>123123</p>',to_date('23/10/19','RR/MM/DD'),null,2,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('EE1B4B6D318C4D06B2DC451FA3E08659',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','123','<p>123</p>',to_date('23/10/19','RR/MM/DD'),null,0,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('F1D0B898632F4C81AE0E8FC5189AFF4F',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','13213','<p>123213</p>',to_date('23/10/19','RR/MM/DD'),null,1,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('813670BAE8C94294A2229E4A495AD2F5',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','ㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱㄱ','<p>ㄱㄱㄱㄱㄱㄱ</p>',to_date('23/10/19','RR/MM/DD'),null,9,null);
+Insert into NOTICE (NOTICE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,NOTICE_TITLE,NOTICE_CONTENT,EDIT_DATE,ATTACHEMENT_FILENAME,READ_COUNT,RENAME_FILENAME) values ('561BE9F570724EBD83037A28397BBEA6',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'dev','backend','ㅅㅅㅅㅅㅅㅅㅅㅅ','<p>ㅅㅅㅅㅅㅅㅅ</p>',to_date('23/10/19','RR/MM/DD'),null,0,null);
+
+
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('EB168D44A607491FAFC0A04DD71A1BB4','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'파일 안올리기 테스트',to_date('23/10/23','RR/MM/DD'),null,'b',10,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('C06114309DD94D7D8245EBC8AE6A3F7B','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'1111',to_date('23/10/23','RR/MM/DD'),null,'b',6,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('706EF8AFA18A4DAEB38BB3BA5F9484EA','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'Awesome title',to_date('23/10/21','RR/MM/DD'),null,'b',10,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('A1C9F61389A743AE8FC76D6827FCF495','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'1111',to_date('23/10/22','RR/MM/DD'),null,'b',9,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('A858664A878D4A1B96A455D6EC400FE5','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'글 쓰기 테스트1',to_date('23/10/22','RR/MM/DD'),null,'b',3,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('7DECF25C274F4DB1BA9930CB9E231FB5','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'새로운 글',to_date('23/10/22','RR/MM/DD'),'["20230802_091556.jpg"]','b',15,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('DC4029491675412A86DAADB847B8D4E8','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'딱 10분',to_date('23/10/23','RR/MM/DD'),null,'b',3,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('575C01ABCC87495D9A75E627E9EB1C20','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'파일 안올리기 테스트',to_date('23/10/23','RR/MM/DD'),null,'b',4,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('D000BBA645B043EB9820C89200627FB1','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'또 댓글을 달아보세',to_date('23/10/24','RR/MM/DD'),'["git주의사항.txt"]','b',52,'998D47BA2E51435496CDDFA381BD7C00','backend','n','y');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('42718A6A8DE5416A98DB069103E1709E','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'또 또 댓글',to_date('23/10/24','RR/MM/DD'),'["git주의사항.txt"]','b',52,'998D47BA2E51435496CDDFA381BD7C00','backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('6C6EF3302197464483A9C6651C12655A','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'다시 한번 댓글을',to_date('23/10/25','RR/MM/DD'),'["오라클설치완료화면.png"]','b',36,'998D47BA2E51435496CDDFA381BD7C00','backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('EA72247005F941328A01BF0C0BFB894F','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'어떤 제목',to_date('23/10/24','RR/MM/DD'),'["20230801_110848_HDR.jpg","20230802_091556.jpg","20230802_091717.jpg","20230802_092100.jpg"]','b',4,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('ACE5DEB4B0A84A16AAB6298DC98EB6BB','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'파일 올리기 테스트',to_date('23/10/24','RR/MM/DD'),null,'b',6,null,'backend','n','y');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('6084B783AC3D4AAA86E95154BD809CEF','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'123',to_date('23/10/25','RR/MM/DD'),'["relational_db_concept.png"]','b',4,'998D47BA2E51435496CDDFA381BD7C00','backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('060C349DA5024B31AF57FE95772ED0D9','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'게시글 테스트',to_date('23/10/25','RR/MM/DD'),'["throw_chain.png","파일질라서버키.png"]','b',10,null,'backend','y','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('D4E9B51FE1A04C438BF1A15233497875','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'댓글 1',to_date('23/10/25','RR/MM/DD'),'["오라클설치완료화면.png","파일질라서버키.png"]','b',5,'060C349DA5024B31AF57FE95772ED0D9','backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('B7FA51F2F8D84A6A8190C680398D1782','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'파일 테스트',to_date('23/10/24','RR/MM/DD'),'["20230802_091717.jpg","20230802_092100.jpg","no_exif.jpg"]','b',17,null,'backend','n','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('998D47BA2E51435496CDDFA381BD7C00','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'그림 파일 말고 텍스트파일로 테스트하자',to_date('23/10/24','RR/MM/DD'),'["1.txt","JSON사용법.txt"]','b',62,null,'backend','y','n');
+Insert into COMMUNITY (BOARD_ID,DEPARTMENT_ID,EMPLOYEE_ID,BOARD_TITLE,BOARD_DATE,ATTACHEMENT_FILENAME,BOARD_TYPE,READ_COUNT,REF_ID,TEAM_ID,REFYN,DELYN) values ('4D25B4926490455DA62E9290507C534D','dev',(select * from (SELECT Employee_Id from employee ORDER BY dbms_random.value) where rownum=1),'댓글을 달아보세',to_date('23/10/24','RR/MM/DD'),'["JSON사용법.txt"]','b',52,'998D47BA2E51435496CDDFA381BD7C00','backend','n','n');
+
+
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('196B0C8C3F9941B9A6D558B191642FE8',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'71DG90nOlP24xLea5zVAamp9wNeAbVQAMYNwW6BvjZdyEmJk',169770387840689,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('72F73265AC384CA0BDC72367C5B329EB',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'gpMwnkjKyO6BYq7GWPVvDQ9mKD6n9w8NE5vbo1d4JlALRXxz',169770434479036,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('49FEEB5FDB864DE8B57431DDBF3809FA',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'gpMwnkjKyO6BYq7GWPVvDQ9mKD6n9w8NE5vbo1d4JlALRXxz',169770468040685,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('9AF2ACCE21E44A359410396D6926F2E0',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'WjDM1PvGzZ0RnYX2w532MJQek0EDkk8NeyqApQEJmKBaOo47',169770472199123,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('91F7379B1B914D4E93B569725FE8067B',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'WjDM1PvGzZ0RnYX2w532MJQek0EDkk8NeyqApQEJmKBaOo47',169770475356369,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('D960675414C2445FBA5622A75DE95684',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'01OAv2P6yqLlDJaYngro9g5mm5544N3ezGdRpXxKN7BQMEk4',169770745906190,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('C2022417B9024100B65221DFBC14C742',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'xMBvpmjnoD4yKeq5bgrpeKRW14M60X8GX0lzW6YOQJ1w9NLR',169771286293813,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('798A27B9BDF24555BFE9D2371362579F',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'xMBvpmjnoD4yKeq5bgrpeKRW14M60X8GX0lzW6YOQJ1w9NLR',169771312581293,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('601CD795748543359773B4161489902B',615,150009,2000003,4500,to_date('23/10/20','RR/MM/DD'),'1',null,null,null,'jPR7DvYpNk6bJXmgo28e4XlWNqzj9XrLAnGKWx4qMl91aEwB',169779605845813,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('698E3AAF1F96417CA45863448AA3334B',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'1',null,'71DG90nOlP24xLea5zVAWg4RoOqyo78QAMYNwW6BvjZdyEmJ',169795893831561,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('7FF939359CA44ABDA0229EB96E76E736',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'1',null,'1kZn04DxKBE92LAa5PVbJz507257kBV7YmpXyJjg6Owzoeqd',169795940370793,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('D3CB0B670BD041219F85477CA402A0B8',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'1',null,'evl2J9MNzjkYG57Eba3G4YDojnj6A5VpWDOxmA1QXRyZ4gLw',169795953725906,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('ACFC9908F8CB4D1DBD1304558673F25E',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'1',null,'y05n91dEvLex6BJGQOVDKWpEdoLxKO3W4w2zNbgaYRMPoqmD',169795976377513,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('5EDC3A7D069B4F0AB193E20825A1D5BD',1013,150009,2000003,5000,to_date('23/10/22','RR/MM/DD'),'1',null,'1',null,'jPR7DvYpNk6bJXmgo28eaGD0ozGJM8LAnGKWx4qMl91aEwB5',169795983695723,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('CD3672F79B9847C88D93431E01392F42',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'1',null,'XJxNkgDKzOEP59LybZ8BlaqYQQoazWV6GYo7pRe10BMQwla2',169796042726318,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('7187C0F92B104CF2BC015D456CEF0956',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'jvX2KBP9QADpexMgkW36zOgWvLQ0jJ3GbR5ozO06yLYlaEJ7',169796094417059,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('6E7488B3B0224E7CB7E2AA5E22115B39',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'zJ4xY7m0kODnyRpQWGrN9wQGdjbnybVKwv1M9ENjbeoPaZdL',169796156639743,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('D5490D7B41F2442BB49F05881D910DF1',1100,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'evl2J9MNzjkYG57Eba3GjRJ0DjbRnl8pWDOxmA1QXRyZ4gLw',169796211188343,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('08ECCB9CD93748EF9AC2C455970D9224',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'zJ4xY7m0kODnyRpQWGrN6L5YwyvDdlrKwv1M9ENjbeoPaZdL',169796231181456,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('BE19E04CFE114F04A55B4FE296BCF978',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3','Ahn-TH','2Dv9ZPM7zXLkKEypNArWQXD4n6LJaA3lmeaxYG5R4Jo6bnOw',169796500729651,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('2E15C1F4C28343DB9647CC39649EFDE7',1000,150009,2000003,1000,to_date('23/10/20','RR/MM/DD'),'1',null,null,null,'9o5gEq4k6YZ1aOwX7K8m40gxj1xxyaryQxzvNPGenpDAlBdb',169777234381508,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('1CB49303630945A9A499D85B961B376C',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'2Dv9ZPM7zXLkKEypNArWpPX09gPPEX8lmeaxYG5R4Jo6bnOw',169796173318699,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('21D4F4D250774436957309AEF6859181',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'71DG90nOlP24xLea5zVAamp9wNeAbVQAMYNwW6BvjZdyEmJk',169770333602398,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('DF5C99FBAF5D4275B1DE0D8DB91A88FC',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'k2WNa0EMg4Gv6LjeKD8aaLQKOWBz9k8wYxAdXy19qpobJmB7',169796250986501,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('66B5D0C35B2A4D0A9D6A8F80D7853FF6',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'k2WNa0EMg4Gv6LjeKD8aaLQKOWBz9k8wYxAdXy19qpobJmB7',169796256253995,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('E928815CCB7945D1861EBECBC13FD021',1006,150009,2000003,5000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'jPR7DvYpNk6bJXmgo28eAzzDwaA7nX8LAnGKWx4qMl91aEwB',169796262179826,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('13A0D29D3C044AD2BE4B1A5041F1D0E0',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'a90ZoyegEOALnQvDd2VJm7d2XQLEwb3Mj7X41mNW5kzKbwG6',169796306814942,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('A53256F2924B4E539D372DD1D172912C',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'vdX0wJDpj5mBZ1gQ4YVXGlkZo5l46G3l2KPoqNbMGOkn9EW7',169796318147515,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('61FC8594D2674A18AEC17973530A4607',1000,150009,2000003,1000,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'WjDM1PvGzZ0RnYX2w532Qmx59xPLk8NeyqApQEJmKBaOo47l',169796474961076,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('A21576CC542F410FB5F4220391F52A37',615,150009,2000003,4500,to_date('23/10/22','RR/MM/DD'),'1',null,'3',null,'d9ojO5qEvKma60RZblrqR904Z9XKPe8wzYWBn14MXAPGg7pD',169796481088122,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('858E110891A544A0812113598776FAAB',1000,150009,2000003,103400,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'vKaNpekDYjZ61JOxRQVEbleQqDdWMQrW0X9bAqwdmgPznL42',169771485845476,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('E57374E98F0942F090DD331C40FAA78A',1000,150009,2000003,81000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'jvX2KBP9QADpexMgkW36wzBWX5vygNVGbR5ozO06yLYlaEJ7',169771490601840,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('8C0BCC2F853141B0B599D58CBFDB4DAA',1000,150009,2000003,431400,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'evl2J9MNzjkYG57Eba3Gm9PgzRPMB5rpWDOxmA1QXRyZ4gLw',169771494735020,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('0187DE07CAA04BF9B257FDA58D650393',1102,150009,2000003,10200,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'a90ZoyegEOALnQvDd2VJq19ejJ47De3Mj7X41mNW5kzKbwG6',169771499060608,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('D7AB6ED494644E9BBA11B35ED24E9D00',1000,150009,2000003,1830000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'evl2J9MNzjkYG57Eba3GYa7LXwnmqwrpWDOxmA1QXRyZ4gLw',169771516203143,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('C12432E2AE724DE4922D089E728A2C13',1001,150009,2000003,1200000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'5EnNZRJGvaBX7zk2yd8yJGoJ0KPoWq3x9POLqKQjmAw4b0e1',169771519698250,'N');
+Insert into PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('BFE2D045834A4558BD4DB40A913507B8',1000,150009,2000003,1000,to_date('23/10/19','RR/MM/DD'),'1',null,null,null,'1kZn04DxKBE92LAa5PVbpDb79oqRzR87YmpXyJjg6Owzoeqd',169771674246975,'N');
+
+
+Insert into CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('52CD16DA8BD34628B0913B4A32C1C993','1','1',(SELECT Employee_Id from employee where employee_name='김화범'),'김화범','1',(SELECT Employee_Id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/22','RR/MM/DD'),to_date('23/10/22','RR/MM/DD'),null,150006,'sangmln',2000003,1300,'잡템',1,644270864203776,615,'Treasure Map',1,null,null,null,null,null,null);
+Insert into CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('5292ADFC870B4863B074979EC80DF752','1','1',(SELECT Employee_Id from employee where employee_name='김화범'),'김화범','1',(SELECT Employee_Id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/22','RR/MM/DD'),null,null,150006,'sangmln',2000003,1300,'잡템',1,644270864203776,1004,'Copper Four-Leaf Necklace',1,null,null,null,null,null,null);
+
+
+
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('6538DE3713DB4E898B80BC652C873EE1','kimjihyuk',null,'1','1','Y',to_date('23/10/17','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('256D966FCBF144448564A77660841CF8','kimjihyuk',null,'2','2','Y',to_date('23/10/17','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('9C89AFE346EC4B2B8180EA2E1CE045D8','kimjihyuk',null,'test11111111','test1111111111','Y',to_date('23/10/17','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('E3A49FBF31C1406E82D19221D296E11E','kimjihyuk',null,'2','2','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('57777138AE0E445AB450796FD741EF4C','kimjihyuk',null,'3','3','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('5BC2A86794C246248E152936A3A6E311','kimjihyuk',null,'4','4','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('48C251A28DAE4AC09E4464EA423A8C5D','kimjihyuk',null,'5','5','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('84A946C6FBB945239D77F999987E9771','kimjihyuk',null,'6','6','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('8A0B5FBB0B294376A69634E83035BE03','kimjihyuk',null,'7','7','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('D095063A854C45979F8E90C90F25C48D','kimjihyuk',null,'8','8','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('279B6737AC944E90BF592F00154AC62D','kimjihyuk',null,'9','9','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('66F24594210B409E894DA9BB4685A956','kimjihyuk',null,'11','11','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('EB8F9CB886DB47D6818BF002F25CCD7D','kimjihyuk',null,'22','22','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('AFF2221F4AD1460B88418ABECAFDAAB8','kimjihyuk',null,'33','33','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('7A3442DC91E1453F9AB0EC901F76C4CE','kimjihyuk',null,'44','44','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('6253D6B9485A4693848C693212C3901D','kimjihyuk',null,'55','55','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('EFA9C353F141488C9EBB3FF8B16E66B8','kimjihyuk',null,'66','66','N',to_date('23/10/20','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('65279F0B123549F9B5920F3A8241A38B','kimjihyuk',null,'m','m','N',to_date('23/10/21','RR/MM/DD'),null,null,null,'1',null,to_date('23/10/21','RR/MM/DD'));
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('04DA2F51126E4BBCBCE3B6EFB1C0C702','kimjihyuk',null,'testFile','testFile','N',to_date('23/10/21','RR/MM/DD'),null,null,'20231021211827.pdf#ch01설치방법.pdf','3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('8D911429B5864A798D9532E4642B565D','kimjihyuk',null,'testFile2','testFile2','N',to_date('23/10/21','RR/MM/DD'),null,null,'20231021212325#ch2_변수.pdf','3',null,to_date('23/10/21','RR/MM/DD'));
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('61A0DA80DEBD47B8BD283E0962AF4D15','kimjihyuk',null,'filedeleteTest1','filedeleteTest1','N',to_date('23/10/21','RR/MM/DD'),null,null,null,'1',null,to_date('23/10/21','RR/MM/DD'));
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('638FBBCA73C342398CE3D230B9CA8E09','kimjihyuk',null,'qwerewrwqerweqrweq','rwqerweqrweqrweqr','N',to_date('23/10/21','RR/MM/DD'),null,null,null,'1',null,to_date('23/10/21','RR/MM/DD'));
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('455E9428184E4B3998CAA7F840D880C1','kimjihyuk',null,'000000','000000','N',to_date('23/10/21','RR/MM/DD'),null,null,null,'1',null,to_date('23/10/21','RR/MM/DD'));
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('0C07DD555D2B4AABB4FAB6D0857E85C0','kimjihyuk',null,'1','1','N',to_date('23/10/21','RR/MM/DD'),null,null,'sample.css','1',null,to_date('23/10/21','RR/MM/DD'));
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('ED6F72873B3E4FBA8B88AB571597C1AA','kimjihyuk',null,'s','s','Y',to_date('23/10/17','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('2617D90F34F04138B0204EE7A9C77A25','kimjihyuk',null,'dasdasd','aaaaaaaaaaaaaaaaaaaag','N',to_date('23/10/21','RR/MM/DD'),null,null,'20231021195829.jpg#image2.jpg','2',null,to_date('23/10/21','RR/MM/DD'));
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('16C374023F484B7F89077CFD92C4D934','kimjihyuk',null,'1','1','N',to_date('23/10/20','RR/MM/DD'),null,null,'20231020173633#image1.jpg','3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('AD0CC52F474F407CB14D28163191300A','kimjihyuk',null,'dd','c','N',to_date('23/10/19','RR/MM/DD'),null,null,null,'1',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('D1052197A0654013A8AA2C53C565473B','member2',null,'테스트 게임문의4 입니다','테스트 게임문의4 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'2',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('AAA67ED2695642948FAB4E7599117B60','member2',null,'테스트 게임문의5 입니다','테스트 게임문의5 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'2',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('D94FED2EC4BC4810A7286472AB334CA2','member2',null,'테스트 게임문의6 입니다','테스트 게임문의6 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'2',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('ED15EA418C754B08B975EC1FBDE41932','member2',null,'테스트 게임문의7 입니다','테스트 게임문의7 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'2',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('067123A1C38F4B0E969136E3ED9D1A4C','member2',null,'테스트 게임문의8 입니다','테스트 게임문의8 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'2',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('B2C1398513734CE2AC2FB466D06E62A6','member2',null,'테스트 게임문의9 입니다','테스트 게임문의9 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'2',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('0903B8BF658F4C1FA8244F8F9AB4F6ED','member2',null,'테스트 게임문의10 입니다','테스트 게임문의10 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'2',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('186241E597834EBE8EE1E749339C84A7','member2',null,'테스트 기타문의1 입니다','테스트 기타문의1 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('35A9336D52924E67B16DFE156146B564','member2',null,'테스트 기타문의2 입니다','테스트 기타문의2 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('A12ECC701F594466ADC231701190FC7C','member2',null,'테스트 기타문의3 입니다','테스트 기타문의3 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('695662F4063B474684E0BA532B2D411A','member2',null,'테스트 기타문의3 입니다','테스트 기타문의3 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('81E29E4F3FE14A639C9CD055EE1B2E96','member2',null,'테스트 기타문의4 입니다','테스트 기타문의4 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('44C88B6608A14FA9BE16C59434D50100','member2',null,'테스트 기타문의5 입니다','테스트 기타문의5 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('F4771793C87E4CB49AD112800BCF1446','member2',null,'테스트 기타문의6 입니다','테스트 기타문의6 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('6F16547C71FF41B0AB9FB3EC0E1B7B8B','member2',null,'테스트 기타문의7 입니다','테스트 기타문의7 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('25F338788E2148A78379B8447A1D0C25','member2',null,'테스트 기타문의8 입니다','테스트 기타문의8 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME,MODIFY_DATE) values ('50EDFA5D1D644D65AC6742DA090CC61A','member2',null,'테스트 기타문의9 입니다','테스트 기타문의9 입니다','N',to_date('23/10/16','RR/MM/DD'),null,null,null,'3',null,null);
+
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('5AB60C5FEA2B460C99905C9660E895BC','kazz900',null,'테스트 문의글1 입니다','테스트 문의글1 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('11328E1AF2A44E1598773EDA9B6D6E9B','kazz900',null,'테스트 문의글2 입니다','테스트 문의글2 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('F7D48875D7434554BF126744EC9CBA36','kazz900',null,'테스트 문의글3 입니다','테스트 문의글3 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('6E78EA05B62B4F809E23C01E4D2C7F41','kazz900',null,'테스트 문의글5 입니다','테스트 문의글5 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('F4881167DCA54EE881C540A2C07126DC','kazz900',null,'테스트 문의글6 입니다','테스트 문의글6 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('0B3995BCA38E4BF8AC187FCAC3FF8E88','kazz900',null,'테스트 문의글7 입니다','테스트 문의글7 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('444609E394444BE1BC66CF34B5C36DF1','kazz900',null,'테스트 문의글8 입니다','테스트 문의글8 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('E907AB6926CC463AA9EC6E34793C5924','kazz900',null,'테스트 문의글9 입니다','테스트 문의글9 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('FBFF72AD18DA44AF89A6055117F3577F','kazz900',null,'테스트 문의글10 입니다','테스트 문의글10 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('F93AB3883D6549E0B916F08AA38DC044','kazz900',null,'테스트 문의글11 입니다','테스트 문의글11 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('02DD9AA53D1444938D0CCC57336D29C3','kazz900',null,'테스트 문의글12 입니다','테스트 문의글12 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('194B6D0D461A401A84D4296385F28FF0','kazz900',null,'테스트 문의글13 입니다','테스트 문의글13 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('0927668BA7A74A5691348A134A02B476','kazz900',null,'테스트 문의글14 입니다','테스트 문의글14 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('5EEBA61882354D44B190DA16E1C5AE35','kazz900',null,'테스트 문의글15 입니다','테스트 문의글15 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('74D39D8074B64E3FAD20FB320961B54A','kazz900',null,'테스트 문의글16 입니다','테스트 문의글16 입니다','N',to_date('23/10/14','RR/MM/DD'),null,null,null,'1',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('4903FE01C148493295A78376761EF310','test1',null,'테스트 게임문의1 입니다','테스트 게임문의1 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('1666DCB4C80B4A9D9F2A997293BB1122','test1',null,'테스트 게임문의2 입니다','테스트 게임문의2 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('6E67FDA10B6541CFAC408365E588E136','test1',null,'테스트 게임문의3 입니다','테스트 게임문의3 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('6D30A3EDAFEA4C5593B02BA15ABC4BDD','test1',null,'테스트 게임문의4 입니다','테스트 게임문의4 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('0627C17F9F804F0188A3099086E3486E','test1',null,'테스트 게임문의5 입니다','테스트 게임문의5 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('35A2C10D5C454B6AA5886EEA5DCC044F','test1',null,'테스트 게임문의6 입니다','테스트 게임문의6 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('B25FDE54F8CC4344BF41905BDE7DC271','test1',null,'테스트 게임문의7 입니다','테스트 게임문의7 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('2585EBE2B4E94EC9837E1CF1370001D6','test2',null,'테스트 게임문의8 입니다','테스트 게임문의8 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('6C58A0A723DD423FB89142D890A0A098','test2',null,'테스트 게임문의9 입니다','테스트 게임문의9 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('31A3D3DD3B17476FA9B972F4DCA7CA8C','test2',null,'테스트 게임문의10 입니다','테스트 게임문의10 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'2',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('246AA2985F274AA3AC72E329FEA3DE06','test3',null,'테스트 기타문의1 입니다','테스트 기타문의1 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('C733AB22245C46D2B0E98DE4F8E16CFF','test3',null,'테스트 기타문의1 입니다','테스트 기타문의1 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('494DE1BFCF494A1EAA7A9852B54BB5D2','test3',null,'테스트 기타문의2 입니다','테스트 기타문의2 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('4E5BF0ADF84B418C981A1E2933D0A37A','test3',null,'테스트 기타문의3 입니다','테스트 기타문의3 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('F0C47EA1453447C5B30FC9D43FDB1093','test3',null,'테스트 기타문의3 입니다','테스트 기타문의3 입니다','Y',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('1719FD4C51714ED585D654642E9335F2','test3',null,'테스트 기타문의4 입니다','테스트 기타문의4 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('FAA694B6555A4C308F51FB34A03D2711','test3',null,'테스트 기타문의5 입니다','테스트 기타문의5 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('24CCBC68BE7C44CE9E11D9EA6B71859B','test4',null,'테스트 기타문의6 입니다','테스트 기타문의6 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('099DB7612D44457C8A7E7CE00602BA70','test4',null,'테스트 기타문의7 입니다','테스트 기타문의7 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('5974360590CE467BBAC2B626CF06AD73','test4',null,'테스트 기타문의8 입니다','테스트 기타문의8 입니다','N',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('CA28FF03F6E64426AD30A3A620B9B87B','test4',null,'테스트 기타문의9 입니다','테스트 기타문의9 입니다','Y',to_date('23/10/15','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('C249D0AC9AC84F1FA62D5390B99FCD53','member2',(SELECT Employee_Id from employee where employee_name='김화범'),'테스트 기타문의1 입니다','테스트 기타문의1 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/18','RR/MM/DD'),'ASDFASDF',null,'3','김화범');
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('559D6FE5F739403C962EA805750C14DD','member2',null,'테스트 기타문의2 입니다','테스트 기타문의2 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/17','RR/MM/DD'),'ASDASD',null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('7B603C365C8440F1A2EA0C772CE14CD8','member2',null,'테스트 기타문의3 입니다','테스트 기타문의3 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/17','RR/MM/DD'),'ASD',null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('5C34783CE67B4C5EAE1812EA8ECC7A5E','member2',(SELECT Employee_Id from employee where employee_name='김화범'),'테스트 기타문의3 입니다','테스트 기타문의3 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/18','RR/MM/DD'),'ASDF',null,'3','김화범');
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('40529D2D14FF43C2A1B1035C78FB5EA9','member2',null,'테스트 기타문의4 입니다','테스트 기타문의4 입니다','N',to_date('23/10/17','RR/MM/DD'),null,null,null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('582E35831A7B4FBCAF4E75911686CDA4','member2',null,'테스트 기타문의5 입니다','테스트 기타문의5 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/17','RR/MM/DD'),'FJKLIEFE',null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('760B90718BB74BBAB44240E453A8C4C6','member2',(SELECT Employee_Id from employee where employee_name='김화범'),'테스트 기타문의6 입니다','테스트 기타문의6 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/18','RR/MM/DD'),'FFFFFFFFFFFF',null,'3','김화범');
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('5FB9B37B50E04566AD59DCA2DE1C31B0','member2',null,'테스트 기타문의7 입니다','테스트 기타문의7 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/19','RR/MM/DD'),'asdasd',null,'3',null);
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('3C74C7A425E443AC8F2216B18CF68B6B','member2',(SELECT Employee_Id from employee where employee_name='김화범'),'테스트 기타문의8 입니다','테스트 기타문의8 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/18','RR/MM/DD'),'ADFGASDFADSFASDF',null,'3','김화범');
+Insert into INQUIRY (INQUIRY_ID,USERID,EMPLOYEE_ID,INQUIRY_TITLE,INQUIRY_CONTENT,ANSWER_STATUS,EDIT_DATE,ANSWER_DATE,ANSWER_CONTENT,ATTACHEMENT_FILENAME,INQUIRY_TYPE,EMP_NAME) values ('BDDB2AFF69F14754989B5C4AC5FDA221','member2',(SELECT Employee_Id from employee where employee_name='김화범'),'테스트 기타문의9 입니다','테스트 기타문의9 입니다','Y',to_date('23/10/17','RR/MM/DD'),to_date('23/10/19','RR/MM/DD'),'123',null,'3','김화범');
+
+
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('A907AFC25B5943E380FB21563A0066B8','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/16','RR/MM/DD'),to_date('23/10/17','RR/MM/DD'),'1',null,'25','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('952BEC1B89EC4663B26EC6FBC8AD738B','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/25','RR/MM/DD'),to_date('23/10/25','RR/MM/DD'),'1',null,'245','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('CE565FA81C0F41538A6DE5A568D00E40','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/11','RR/MM/DD'),to_date('23/10/14','RR/MM/DD'),'1',null,'31234','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('211E06F5C9CB4A1AB451FA7E4B729044','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/16','RR/MM/DD'),to_date('23/10/19','RR/MM/DD'),'1',null,'1325','true');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('47BA95F061C749358A9FD866D7B0B3D8','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/17','RR/MM/DD'),to_date('23/10/20','RR/MM/DD'),'3',null,'팀 일정32323','true');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('6CD85F3A432F48F184767E4E1B607281','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/11/07','RR/MM/DD'),to_date('23/11/07','RR/MM/DD'),'1',null,'11월 수정전','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('82391153E7B14A7F8737C04C0A8F0209','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/11/13','RR/MM/DD'),to_date('23/11/13','RR/MM/DD'),'1',null,'1234','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('D462902C78FD4C788DA9BD55B34105C8','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/31','RR/MM/DD'),to_date('23/10/31','RR/MM/DD'),'4',null,'수정 전','true');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('72F2B8C29000478993C5D3DE5D1318AD','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/02','RR/MM/DD'),to_date('23/10/05','RR/MM/DD'),'1',null,'25623','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('088660BBDA6E4D848FC2A30085726CFB','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/03','RR/MM/DD'),to_date('23/10/03','RR/MM/DD'),'1',null,'일정 추가','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('87D03FA5F2C14586B7E1B6ED54BBB3F0','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/01','RR/MM/DD'),to_date('23/10/01','RR/MM/DD'),'1',null,'32125','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('D4A575EA901F4653BFED59EC29C30E21','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/10','RR/MM/DD'),to_date('23/10/10','RR/MM/DD'),'1',null,'1234','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('DE25E77166C5462CBE4BE816C6637673','6B67DD76E5264FF6875E1F4C3D6100A8','dev','backend','sman',to_date('23/10/03','RR/MM/DD'),to_date('23/10/03','RR/MM/DD'),'1',null,'312','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('645C2775C9A8451780A3B8B3F0FA3D02','6B67DD76E5264FF6875E1F4C3D6100A8','dev','backend','sman',to_date('23/10/04','RR/MM/DD'),to_date('23/10/04','RR/MM/DD'),'2',null,'호랑이 일정(부서)','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('3D37BBC4080B4A70A7D96369E3241E9C','6B67DD76E5264FF6875E1F4C3D6100A8','dev','backend','sman',to_date('23/10/05','RR/MM/DD'),to_date('23/10/05','RR/MM/DD'),'3',null,'호랑이 일정(팀)','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('D573E37BD4A6423BAC1F6180A28327B3','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/10/27','RR/MM/DD'),to_date('23/10/27','RR/MM/DD'),'2',null,'부서회식(오상민)','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('9124520A65C74713AEDD0223CD6CA23C','36689920139B4D40AE29A7D273A7B2AE','dev','backend','emp',to_date('23/11/03','RR/MM/DD'),to_date('23/11/03','RR/MM/DD'),'3',null,'팀 회식(오상민)','false');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('662F95E63808436F84E728829E279F68','6B67DD76E5264FF6875E1F4C3D6100A8','dev','backend','sman',to_date('23/10/10','RR/MM/DD'),to_date('23/10/12','RR/MM/DD'),'1',null,'23','true');
+Insert into SCHEDULE (SCHEDULE_ID,EMPLOYEE_ID,DEPARTMENT_ID,TEAM_ID,RANK_ID,SCHEDULE_STARTDAY,SCHEDULE_ENDDAY,SCHEDULE_TYPE,SCHEDULE_ADDRESS,SCHEDULE_THEME,SCHEDULE_CONTENT) values ('1F920DF0C8234297A1C1D1E01D314C67','6B67DD76E5264FF6875E1F4C3D6100A8','dev','backend','sman',to_date('23/10/05','RR/MM/DD'),to_date('23/10/07','RR/MM/DD'),'3',null,'12','true');
+
+
+REM INSERTING into C##LEVELUP.CASE
+SET DEFINE OFF;
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('5F6E3A1F4B0142269B97557CA34BEDBE','테스트 제목','테스트기안',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/20','RR/MM/DD'),null,'20231020151815',150003,'sangmin',2000005,0,'잡템',1,644257979301891,1007,'Platinum Four-Leaf Necklace',9,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('75B87A342B424BA2904096085E0AAE8E','1111','1111',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/21','RR/MM/DD'),to_date('23/10/21','RR/MM/DD'),null,150003,'sangmin',2000005,0,'잡템',1,644257979301889,615,'Treasure Map',11,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('36B2CDB277C443ADB97243A456C5B06B','111','1111',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',11,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('D3AEE7F43F734B25B6A640C5567BD1A7','1111','1111',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',5,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('408A778FC2B44116A2CC0A9DAFB4210B','111','111',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',1,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('90FB291B60A248E28FDB542A2B3EB86B','111','1111',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',5,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('FDD78EA309CB41E1A034DD69E54FB5DF','111','1111',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',1,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('C1E31286138D44938E99501AB8A282D8','22222','22',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',1,0,1008,'Tooth Necklace',222,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('F7E037F59CF84812969062B4C7AF0A6A','33333','3333',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',1,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('DCE66A31E7FA46E29E60AF7FEC089ABD','eeee','eeee',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','2',to_date('23/10/21','RR/MM/DD'),to_date('23/10/23','RR/MM/DD'),null,150003,'sangmin',2000005,0,'잡템',11,0,1004,'Copper Four-Leaf Necklace',3,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('7F949FED8294451593CBC6E4ECC1D53C','테스트 환불 기안 ','테스트 환불 기안 ',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,'150005_1110_20231023141612.jpg',150005,'yumi',2000007,1110,'잡템 Silver Signet Ring',1,169803481721565,null,null,null,null,null,0,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('BA8B4B1ECA9C4A27979DFB3E77060BB3','제목','내용',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/20','RR/MM/DD'),null,'20231020145113',150003,'sangmin',2000005,2210,'Terranite Pants',1,644257979301906,1000,'Copper Necklace',9,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('601927DE16F6449E9829B32B6A821D35','11111111111','111111111111111',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/20','RR/MM/DD'),null,'20231020145247',150003,'sangmin',2000005,2210,'Terranite Pants',1,644257979301906,1009,'Teeth Necklace',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('7E43AFEEA51A4F02AEBF6C87771187C7','테스트 제목','테스트기안',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/20','RR/MM/DD'),null,'20231020152111',150003,'sangmin',2000005,0,'잡템',1,644257979301891,625,'Seafood Plate',9,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('25EFB1E7D3504651A2687BD89C24B1FD','제목','sd',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/20','RR/MM/DD'),null,'20231020154628',150003,'sangmin',2000005,0,'잡템',1,644257979301889,1006,'Golden Four-Leaf Necklace',9,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('F804E198150E415FBB9366E163224636','1','1',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/20','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',1,644257979301889,615,'Treasure Map',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('40F4F2C01113444999599D6B03559039','1','1',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/20','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템',1,644257979301889,1008,'Tooth Necklace',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('91F9FD5DD7EE4B278C0EAEC018B4CA12','아이템 변경 게임 디비 확인','아이템 변경 게임 디비 확인',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150005,'yumi',2000007,0,'잡템',1,0,1004,'Copper Four-Leaf Necklace',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('2A5E6CFB6C6E4867A128FE72C239B321','아이템 변경 확인','아이템 변경 확인',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/21','RR/MM/DD'),to_date('23/10/21','RR/MM/DD'),null,150003,'sangmin',2000005,3522,'Long Sword',1,644257979301897,1008,'Tooth Necklace',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('2DD4326D3C1F43AB875996A796978E9A','삭제 기안','삭제 기안',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/22','RR/MM/DD'),null,null,150003,'sangmin',2000005,2200,'잡템 ',1,644257979301889,0,null,0,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('850833F6180B4577A5A84A714C66EA16','706','706',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/22','RR/MM/DD'),null,null,150003,'sangmin',2000005,706,'잡템 706',1,0,0,null,0,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('552D1151FD184CFFAAEE9E04C9D9B477','삭제기안 테스트11111','11111',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/22','RR/MM/DD'),to_date('23/10/22','RR/MM/DD'),null,150003,'sangmin',2000005,2200,'잡템 2200',1,644257979301889,0,null,0,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('F2809EB217E54A8CAE575394629F72F4','첨부파일 이름 확인 기안','aaaaa',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,'20231023094542',150005,'yumi',2000007,512,'잡템 ',1,0,615,'Treasure Map',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('4DAFE8D3F30D408C81178B8A66B38C83','첨부파일 이름 변경 확인 기안333','33333',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,'150005_515_20231023101740.jpg',150005,'yumi',2000007,515,'잡템 515',3,0,0,null,0,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('B96B44FB20E1402888773E9B5BAB1B9A','변경기안 확인 1023','변경기안 확인 1023',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,null,150003,'sangmin',2000005,0,'잡템 ',0,644257979301889,625,'Seafood Plate',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('129AC7782F274FF9838B0BAED85303CF','환불 테스트 55555','환불 테스트 55555',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,null,150005,'yumi',2000007,1110,'Silver Signet Ring',1,169803481721565,null,null,null,null,null,0,null,'서버 오류',null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('23074CE89E6B413BA3ECFBFC5675FCF2','환불 기안 승인 테스트 기안','환불 기안 승인 테스트 기안',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','2',to_date('23/10/23','RR/MM/DD'),to_date('23/10/23','RR/MM/DD'),null,150005,'yumi',2000007,1110,'Silver Signet Ring',1,169803481721565,null,null,null,to_date('23/10/23','RR/MM/DD'),'1',5000,null,'환불 기안 승인 테스트 기안','e75jWNka9lpP2YxJ4K87E0Q5N0KD1zVRGZwXLObgyB0vMDm1');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('D90620D7BA514D08AC5CA031CC93E4DB','환불 테스트 777777777777','환불 테스트 777777777777',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/23','RR/MM/DD'),to_date('23/10/23','RR/MM/DD'),null,150005,'yumi',2000007,613,'Purification Potion',1,169803370382977,null,null,null,to_date('23/10/23','RR/MM/DD'),'1',2500,to_date('23/10/23','RR/MM/DD'),'환불 테스트 777777777777','2Dv9ZPM7zXLkKEypNArWYlg4WpLjpA3lmeaxYG5R4Jo6bnOw');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('18A7189A83254C79B148C055F9A906DD','환불 기안 테스트 완료시 결제 내역 리스트로 가는가','1111',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/24','RR/MM/DD'),to_date('23/10/24','RR/MM/DD'),null,150005,'yumi',2000007,1106,'Silver Ring',1,169810765309937,null,null,null,to_date('23/10/24','RR/MM/DD'),'1',2000,to_date('23/10/24','RR/MM/DD'),'111','WjDM1PvGzZ0RnYX2w532E7mMobL5WM8NeyqApQEJmKBaOo47');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('65A49FEDAE7C48F1A89D65FEAD2B53A4','150005 캐릭터 아이템 503 변경 기안 ','150005 캐릭터의 아이템 503을 1008번 아이템 Tooth Necklace 으로 변경하는 기안 ',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/24','RR/MM/DD'),to_date('23/10/24','RR/MM/DD'),'150005_503_20231024100205.png',150005,'yumi',2000007,503,'아이템 ',1,0,1008,'Tooth Necklace',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('0E473D5C348D4ED29D4B51251E05CD7B','150005 캐릭터 아이템 1008 아이템 삭제 기안 ','150005 캐릭터의 1008번 Tooth Nechlace 아이템을 삭제하는 기안',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/24','RR/MM/DD'),to_date('23/10/24','RR/MM/DD'),'150005_1008_20231024102054.png',150005,'yumi',2000007,1008,'Tooth Necklace',1,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('A2C6BC93B0484417B632C19B32CB1B81','150005 캐릭터 아이템 615 아이템 환불 기안 ','150005 캐릭터 아이템 615 아이템 환불 기안 ',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/25','RR/MM/DD'),to_date('23/10/25','RR/MM/DD'),null,150005,'yumi',2000007,615,'Treasure Map',1,169821224653373,null,null,null,to_date('23/10/25','RR/MM/DD'),'1',4500,to_date('23/10/25','RR/MM/DD'),'구매한 것과 다른 아이템이 발송됨','zJ4xY7m0kODnyRpQWGrNzEE10Q1gg2rKwv1M9ENjbeoPaZdL');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('EBA29C34D9B54B1AA0FAD4287EB3348D','제목','2',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/20','RR/MM/DD'),null,'20231020153443',150003,'sangmin',2000005,0,'잡템',1,644257979301889,625,'Seafood Plate',2,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('807F57DA7A9143799380541CAE289F4E','제목','22',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/20','RR/MM/DD'),to_date('23/10/21','RR/MM/DD'),'20231020153520',150003,'sangmin',2000005,0,'잡템',1,644257979301889,627,'Veggie Plate',22,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('9B47522F76664DD4989D614BE276FE9A','제목','내용내용',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','2',to_date('23/10/20','RR/MM/DD'),null,'20231020153945',150003,'sangmin',2000005,0,'잡템',1,644257979301889,1001,'Silver Necklace',3,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('AEF2229B7A2E4FCE8D08E70DAC5D782E','제목','내용내용',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/20','RR/MM/DD'),null,'20231020154225',150003,'sangmin',2000005,0,'잡템',1,644257979301889,1001,'Silver Necklace',3,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('07A192E5312145D1A31688729085F642','삭제기안 테스트','삭제기안 테스트',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/21','RR/MM/DD'),null,'20231021132913',150003,'sangmin',2000005,0,'잡템',1,644257979301889,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('0B51133F5D0F4DDDBA5F88962E09456A','아이템 변경 게임 디비 확인','아이템 변경 게임 디비 확인',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,null,150005,'yumi',2000007,0,'잡템',1,0,1005,'Silver Four-Leaf Necklace',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('54D2CD399F764FA18CDB72C126252D3F','아이템 삭제 기안 게임 디비 실행 확인','아이템 삭제 기안 게임 디비 실행 확인',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/22','RR/MM/DD'),null,null,150005,'yumi',2000007,0,'잡템',1,0,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('A273365DAD074A8BB22AB7C326ADCB06','테스트 환불 기안 222','테스트 환불 기안 222',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,null,150005,'yumi',2000007,1110,'Silver Signet Ring',1,169803481721565,null,null,null,null,null,0,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('51052411298D4AE4ABCFD6E44DDC9391','환불 테스트 33333','환불 테스트 33333',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,null,150005,'yumi',2000007,1110,'Silver Signet Ring',1,169803481721565,null,null,null,null,null,0,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('78D6467985D6426483AB2EE2D1BCFAC1','환불 기안 테스트44444','환불 기안 테스트44444',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,null,150005,'yumi',2000007,1110,'Silver Signet Ring',1,169803481721565,null,null,null,null,null,0,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('3DF20CE0BD4E4CE7936D6C68C47B907F','환불 테스트 55555','환불 테스트 55555',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,null,150005,'yumi',2000007,1110,'Silver Signet Ring',1,169803481721565,null,null,null,to_date('23/10/23','RR/MM/DD'),'1',5000,null,'환불 테스트 55555','e75jWNka9lpP2YxJ4K87E0Q5N0KD1zVRGZwXLObgyB0vMDm1');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('B9FE05214AA34F009295AAF151C3C17B','첨부파일 이름 변경 확인 기안','첨부파일 이름 변경 확인 기안',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,'null.jpg',150003,'sangmin',2000005,706,'잡템 ',1,0,614,'Sailor''s Stew',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('71E8D8C9D12C4048AB35972C7EA3926B','기안 환불 진행 테스트 22222222222','기안 환불 진행 테스트 22222222222',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/23','RR/MM/DD'),to_date('23/10/23','RR/MM/DD'),null,150005,'yumi',2000007,608,'Fertility Potion',1,169803478748324,null,null,null,to_date('23/10/23','RR/MM/DD'),'1',2500,to_date('23/10/23','RR/MM/DD'),'기안 환불 진행 테스트 22222222222','ZDBYqJLQ1GKNbdOvk5rk4GgW7MGGWE8n07xlzmj6R9e4oPpE');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('342963E7238A4859B3956C3D09E7730C','환불 기안 테스트 333333333333333333333','환불 기안 테스트 333333333333333333333',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/23','RR/MM/DD'),to_date('23/10/23','RR/MM/DD'),null,150005,'yumi',2000007,1110,'Silver Signet Ring',1,169803475871469,null,null,null,to_date('23/10/23','RR/MM/DD'),'1',5000,to_date('23/10/23','RR/MM/DD'),'환불 기안 테스트 333333333333333333333','Kl56WYb7w4vZnjEJeQVxNqkY2LnxxP8PmOoBN0k12dzgRG9p');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('4C8868E77C374B33945C3BF824DF3F40','환불 기안 66666666666666','환불 기안 66666666666666',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/23','RR/MM/DD'),to_date('23/10/23','RR/MM/DD'),null,150005,'yumi',2000007,1006,'Golden Four-Leaf Necklace',1,169803473377452,null,null,null,to_date('23/10/23','RR/MM/DD'),'1',5000,to_date('23/10/23','RR/MM/DD'),'환불 기안 66666666666666','k2WNa0EMg4Gv6LjeKD8aBXLbeOkZLx3wYxAdXy19qpobJmB7');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('1221759BA531409ABD20800C921F1A07','1100번 아이템 Simple Copper Ring 환불 기안','시스템 오류로 인하여 구매한 아이템은 게임 내 메일로 도착하였으며 수령하기가 작동하지 않음. 
+유저의 환불 요청 있음. 1100번 아이템 Simple Copper Ring 환불 진행',(select employee_id from employee where employee_name='최유미'),'최유미','3',(select employee_id from employee where employee_name='호랑이'),'호랑이','1',to_date('23/10/24','RR/MM/DD'),to_date('23/10/24','RR/MM/DD'),'150005_1100_20231024150245.png',150005,'yumi',2000007,1100,'Simple Copper Ring',1,169811191305474,null,null,null,to_date('23/10/24','RR/MM/DD'),'1',1000,to_date('23/10/24','RR/MM/DD'),'게임 오류로 인한 아이템 수령불가','jPR7DvYpNk6bJXmgo28eEXqDPlqQxE8LAnGKWx4qMl91aEwB');
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('4878A62E70E048819483C75D292FAC6F','기안 반려 시스템 테스트','기안 반려 시스템 테스트',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','2',to_date('23/10/24','RR/MM/DD'),to_date('23/10/24','RR/MM/DD'),null,150005,'yumi',2000007,1013,'Skull Necklace',1,169811180062946,1007,'Platinum Four-Leaf Necklace',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('B175089AFB2F45228ADD9B7A7552FF0A','TESTTITLE','TESTCONETENT',(select employee_id from employee where employee_name='최유미'),'TESTWRITERNAME','1',(select employee_id from employee where employee_name='호랑이'),'TESTMANAGERNAME','0',to_date('23/10/20','RR/MM/DD'),null,null,123,'TESTCHARNAME',123,123,'TESTORIGINITEM',1,1234567890,456,'TESTNEWITEM',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('EAD48E5AF4E64B1186B9FD5609409313','aaaa','33333',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,'20231021163010',150003,'sangmin',2000005,0,'잡템',1,644257979301889,613,'Purification Potion',33,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('377A2559BD7944F085CE715A206D7AB9','dddd','dddd',(select employee_id from employee where employee_name='최유미'),'최유미','2',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/21','RR/MM/DD'),null,'20231021163514.jpg',150003,'sangmin',2000005,0,'잡템',1,644257979301889,null,null,null,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('DD16DF3687AB4F1A86672ED17E7382AD','잡템 이름 기안 테스트 222','잡템 이름 기안 테스트 222',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/22','RR/MM/DD'),null,null,150003,'sangmin',2000005,737,'잡템 737',1,0,625,'Seafood Plate',1,null,null,null,null,null,null);
+Insert into C##LEVELUP.CASE (CASE_ID,CASE_TITLE,CASE_CONTENT,CASE_WRITER_ID,CASE_WRITER_NAME,CASE_TYPE,CASE_MANAGER_ID,CASE_MANAGER_NAME,CASE_STATUS,EDIT_DATE,SIGN_DATE,ATTACHMENT_FILENAME,CHAR_ID,CHAR_NAME,ACCOUNT_ID,ORIGINAL_ITEM_ID,ORIGINAL_ITEM_NAME,ORIGINAL_ITEM_AMOUNT,UNIQUE_ID,NEW_ITEM_ID,NEW_ITEM_NAME,NEW_ITEM_AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,PAYMENT_AMOUNT,REFUND_DATE,REFUND_CAUSE,PAYMENT_KEY) values ('96830C696F224FC2A6B76353A8B17E11','첨부파일 이름 변경 확인 기안222','첨부파일 이름 변경 확인 기안222',(select employee_id from employee where employee_name='최유미'),'최유미','1',(select employee_id from employee where employee_name='호랑이'),'호랑이','0',to_date('23/10/23','RR/MM/DD'),null,'null70220231023101556.jpg',150005,'yumi',2000007,702,'잡템 ',1,0,625,'Seafood Plate',1,null,null,null,null,null,null);
+--------------------------------------------------------
+
+
+REM INSERTING into C##LEVELUP.PAYMENT
+SET DEFINE OFF;
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('DE823273BDBF43ECAF64BA131A3BD708',1110,150005,2000007,5000,to_date('23/10/23','RR/MM/DD'),'2',null,'테스트 환불','yumi','Kl56WYb7w4vZnjEJeQVxNqkY2LnxxP8PmOoBN0k12dzgRG9p',169803475871469,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('86E6FA37B73A4C3DA8F4F52252562F3C',613,150005,2000007,2500,to_date('23/10/23','RR/MM/DD'),'2',null,'테스트 환불','yumi','2Dv9ZPM7zXLkKEypNArWYlg4WpLjpA3lmeaxYG5R4Jo6bnOw',169803370382977,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('25B7307B16A347BA9843CD4A8FE51972',1006,150005,2000007,5000,to_date('23/10/23','RR/MM/DD'),'2',null,'테스트 환불','yumi','k2WNa0EMg4Gv6LjeKD8aBXLbeOkZLx3wYxAdXy19qpobJmB7',169803473377452,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('356207463D0848D78FBADEC6BA3DD226',608,150005,2000007,2500,to_date('23/10/23','RR/MM/DD'),'2',null,'테스트 환불','yumi','ZDBYqJLQ1GKNbdOvk5rk4GgW7MGGWE8n07xlzmj6R9e4oPpE',169803478748324,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('92CBDAF05B204C8EBC4475EE0CB24775',1106,150005,2000007,2000,to_date('23/10/24','RR/MM/DD'),'2',null,'테스트 환불','yumi','WjDM1PvGzZ0RnYX2w532E7mMobL5WM8NeyqApQEJmKBaOo47',169810765309937,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('1F28010355E44CCB9888ED8AC927CEB2',1006,150005,2000007,5000,to_date('23/10/24','RR/MM/DD'),'1',null,'3','yumi','oYwn6qbDZOAQ92ymxN34Z4ZAXY2vJyrajRKXvdk4El1Bp0J5',169811087681812,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('D5BF26790E6146C4825820B217155734',1013,150005,2000007,5000,to_date('23/10/24','RR/MM/DD'),'1',null,'3','yumi','gN60L1adJYyZqmkKeP8gPO9x51GdZK3bQRxB9lG5DnzWE7pM',169811180062946,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('8327FBC924864F0A968CF75C0B77AEDF',1100,150005,2000007,1000,to_date('23/10/24','RR/MM/DD'),'2',null,'테스트 환불','yumi','jPR7DvYpNk6bJXmgo28eEXqDPlqQxE8LAnGKWx4qMl91aEwB',169811191305474,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('4A7E46553A044304AE94E36C476FFAFD',615,150005,2000007,4500,to_date('23/10/25','RR/MM/DD'),'2',null,'테스트 환불','yumi','zJ4xY7m0kODnyRpQWGrNzEE10Q1gg2rKwv1M9ENjbeoPaZdL',169821224653373,'N');
+Insert into C##LEVELUP.PAYMENT (PAYMENT_ID,ITEM_ID,CHAR_ID,ACCOUNT_ID,AMOUNT,PAYMENT_DATE,PAYMENT_STATUS,REFUND_DATE,REFUND_CAUSE,CHAR_NAME,PAYMENT_KEY,UNIQUE_ID,EMAIL_STATUS) values ('34E4E0E61B9E4295B27D72BB0F8AECBD',1006,150005,2000007,5000,to_date('23/10/24','RR/MM/DD'),'1',null,'3','yumi','d9ojO5qEvKma60RZblrqymPovgyPGbrwzYWBn14MXAPGg7pD',169812603234871,'N');
+--------------------------------------------------------
+
+commit;

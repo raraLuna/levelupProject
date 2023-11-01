@@ -1,0 +1,8 @@
+68페이지 conflict시 주의사항이 가장 학생들이 많이 힘들어 하는 부분입니다. 
+merge가 failed 뜰 때 해결법입니다.
+
+주의 : 
+brench 에서 pooling 했는데 변경된 내용으로 업데이트 안 될 때는
+master 가 brench 를 반드시 merge 를 해야 함
+=> 그 다음 brench 에서 pooling 하면 변경된 내용으로 바뀜
+=> brench 는 본인 것을 commit 한 다음에 pooling 할 것

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="charMapper">
+
+	<resultMap id="resultChar" type="Char">
+		<id column="char_id" property="charId" />
+		<result column="account_id" property="accountId"/>
+		<result column="char_num" property="charNum"/>
+		<result column="name" property="name"/>
+		<result column="class" property="class_"/>
+		<result column="base_level" property="baseLevel"/>
+		<result column="job_level" property="jobLevel"/>
+		<result column="base_exp" property="baseExp"/>
+		<result column="job_exp" property="jobExp"/>
+		<result column="zeny" property="zeny"/>
+		<result column="str" property="str"/>
+		<result column="agi" property="agi"/>
+		<result column="vit" property="vit"/>
+		<result column="int" property="int_"/>
+		<result column="dex" property="dex"/>
+		<result column="luk" property="luk"/>
+		<result column="max_hp" property="maxHp"/>
+		<result column="hp" property="hp"/>
+		<result column="max_sp" property="maxSp"/>
+		<result column="sp" property="sp"/>
+		<result column="status_point" property="statusPoint"/>
+		<result column="skill_point" property="skillPoint"/>
+		<result column="last_login" property="lastLogin"/>
+		<result column="last_map" property="lastMap"/>
+		<result column="online" property="online"/>
+	</resultMap> 
+	
+	<resultMap id="resultList" type="Char">
+		<result column="char_id" property="charId" />
+		<result column="account_id" property="accountId"/>
+		<result column="char_num" property="charNum"/>
+		<result column="name" property="name"/>
+		<result column="class" property="class_"/>
+		<result column="base_level" property="baseLevel"/>
+		<result column="job_level" property="jobLevel"/>
+		<result column="base_exp" property="baseExp"/>
+		<result column="job_exp" property="jobExp"/>
+		<result column="zeny" property="zeny"/>
+		<result column="str" property="str"/>
+		<result column="agi" property="agi"/>
+		<result column="vit" property="vit"/>
+		<result column="int" property="int_"/>
+		<result column="dex" property="dex"/>
+		<result column="luk" property="luk"/>
+		<result column="max_hp" property="maxHp"/>
+		<result column="hp" property="hp"/>
+		<result column="max_sp" property="maxSp"/>
+		<result column="sp" property="sp"/>
+		<result column="status_point" property="statusPoint"/>
+		<result column="skill_point" property="skillPoint"/>
+		<result column="last_login" property="lastLogin"/>
+		<result column="last_map" property="lastMap"/>
+		<result column="online" property="online"/>
+	</resultMap> 
+	
+	<select id="selectCharacters" parameterType="_int" resultMap="resultList">
+		SELECT * FROM evol.char WHERE evol.char.account_id = #{ accountId }
+	</select>
+	
+	<select id="selectCharacter" parameterType="_int" resultMap="resultChar">
+		SELECT * FROM evol.char WHERE evol.char.char_id = #{ charId }
+	</select>
+	
+	<select id="selectAll" resultMap="resultList">
+		select * from evol.char
+	</select>
+	
+	<select id="selectCharacterName" parameterType="string" resultMap="resultChar">
+		select * from evol.char where evol.char.name = #{ name } 
+	</select>
+	
+
+	
+	
+</mapper>

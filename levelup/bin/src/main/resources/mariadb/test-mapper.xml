@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mariatest">
+
+	<resultMap type="CharEvol" id="charEvol">
+	
+		<id column="char_id" property="charId" />
+		<result column="account_id" property="accountId"/>
+	</resultMap>
+	
+	<select id="selectAll" resultMap="CharEvol">
+		select * from char
+	</select>
+		
+</mapper>

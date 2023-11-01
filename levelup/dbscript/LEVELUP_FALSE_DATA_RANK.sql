@@ -1,0 +1,28 @@
+INSERT INTO RANK
+VALUES('emp', '사원');
+
+INSERT INTO RANK
+VALUES('intern', '인턴');
+
+INSERT INTO RANK
+VALUES('chief', '주임');
+
+INSERT INTO RANK
+VALUES('senior', '대리');
+
+INSERT INTO RANK
+VALUES('jman', '과장');
+
+INSERT INTO RANK
+VALUES('sman', '차장');
+
+INSERT INTO RANK
+VALUES('jdirec', '전무');
+
+INSERT INTO RANK
+VALUES('direc', '이사');
+
+INSERT INTO RANK
+VALUES('ceo', 'CEO');
+
+COMMIT;

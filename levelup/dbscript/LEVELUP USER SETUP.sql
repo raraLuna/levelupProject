@@ -1,0 +1,5 @@
+CREATE USER c##levelup identified by levelup;
+
+GRANT CONNECT, RESOURCE, DBA, CREATE SEQUENCE, CREATE VIEW TO c##levelup;
+
+ALTER USER c##levelup QUOTA 1G ON USERS;

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC
+"-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 마이바티스는 sql 구문에 사용되는 값이 NULL 이면 에러 발생함 
+		NULL 을 사용할 수 있게 하려면 	-->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="cacheEnabled" value="false"/>
+	</settings>
+	
+	<typeAliases>
+		<!-- 존재하지 않는 클래스를 등록하면 톰캣 구동 안됨 
+		vo 클래스의 줄임말을 등록. mapper.xlm 에서 줄임말 쓰기 위한 용도 -->
+ 		<typeAlias type="com.gs.levelup.common.Paging" alias="Paging" />
+ 		<typeAlias type="com.gs.levelup.common.Search" alias="Search" />
+ 		<typeAlias type="com.gs.levelup.common.SearchDate" alias="SearchDate" />
+		<typeAlias type="com.gs.levelup.character.model.vo.Character" alias="Char" />
+		<typeAlias type="com.gs.levelup.user.model.vo.User" alias="User" />
+
+		<typeAlias type="com.gs.levelup.charlog.model.vo.CharLog" alias="CharLog" />
+		<typeAlias type="com.gs.levelup.loginlog.model.vo.LoginLog" alias="LoginLog" />
+		<typeAlias type="com.gs.levelup.inventory.model.vo.Inventory" alias="Inventory" />
+		<typeAlias type="com.gs.levelup.picklog.model.vo.PickLog" alias="PickLog" />
+
+		<typeAlias type="com.gs.levelup.rodexMail.model.vo.RodexMail" alias="RodexMail" />
+		<typeAlias type="com.gs.levelup.rodexItems.model.vo.RodexItems" alias="RodexItems" />
+		<typeAlias type="com.gs.levelup._case.model.vo.Case" alias="Case" />
+		
+	</typeAliases>
+
+	<mappers>
+		<!-- 존재하지 않는 파일을 등록하면 톰캣 구동 안됨 -->
+		<!-- 클래스들은 java 폴더가 base -->
+		<mapper resource="mappers/mariadb/user-mapper.xml" />
+		<mapper resource="mappers/mariadb/log-mapper.xml" />
+		<mapper resource="mappers/mariadb/character-mapper.xml" />
+		<mapper resource="mappers/mariadb/inventory-mapper.xml" />
+		<mapper resource="mappers/mariadb/rodexmail-mapper.xml" />
+		
+	</mappers>
+</configuration>

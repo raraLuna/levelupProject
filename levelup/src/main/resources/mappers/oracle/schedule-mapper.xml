@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="scheduleMapper">
+
+	<resultMap type="Schedule" id="resultSchedule">
+		<result column="SCHEDULE_ID" property="scheduleId" />
+		<result column="EMPLOYEE_ID" property="employeeId" />
+		<result column="DEPARTMENT_ID" property="departmentId" />
+		<result column="TEAM_ID" property="teamId" />
+		<result column="RANK_ID" property="rankId" />
+		<result column="SCHEDULE_STARTDAY" property="scheduleStartday" />
+		<result column="SCHEDULE_ENDDAY" property="scheduleEndday" />
+		<result column="SCHEDULE_TYPE" property="scheduleType" />
+		<result column="SCHEDULE_ADDRESS" property="scheduleAddress" />
+		<result column="SCHEDULE_THEME" property="scheduleTheme" />
+		<result column="SCHEDULE_CONTENT" property="scheduleContent" />
+		<result column="READ" property="read" />
+		
+		
+	</resultMap>
+	
+	
+
+	<select id="selectScheduleList" resultMap="resultSchedule">
+		<![CDATA[
+		select * from schedule where EMPLOYEE_ID = #{employeeId}
+		 or (SCHEDULE_TYPE in('2', '3') and DEPARTMENT_ID = #{departmentId}) 
+		 or (SCHEDULE_TYPE in('2', '3') and TEAM_ID = #{teamId})
+		]]>
+	</select>
+	
+	<select id="selectTDScheduleList" resultMap="resultSchedule">
+		<![CDATA[
+		select * from schedule where (read is null and (trunc(schedule_startday) <= trunc(sysdate) and trunc(schedule_endday) >= trunc(sysdate))) 
+		and (EMPLOYEE_ID = #{employeeId}
+		 or (SCHEDULE_TYPE = '2' and DEPARTMENT_ID = #{departmentId}) 
+		 or (SCHEDULE_TYPE = '3' and TEAM_ID = #{teamId}))
+		]]>
+	</select>
+	
+	<insert id="insertSchedule" parameterType="Schedule">
+		insert into schedule 
+		values (default, 
+				#{employeeId}, #{departmentId}, #{teamId}, #{rankId}, 
+				#{scheduleStartday}, #{scheduleEndday}, #{scheduleType}, #{scheduleAddress}, #{scheduleTheme}, #{scheduleContent}, default)
+	</insert>
+	
+	<update id="updateSchedule" parameterType="Schedule">
+    update schedule 
+    set SCHEDULE_STARTDAY = #{scheduleStartday}, 
+        SCHEDULE_ENDDAY = #{scheduleEndday},
+        SCHEDULE_ADDRESS = #{scheduleAddress},
+        SCHEDULE_TYPE = #{scheduleType},
+        SCHEDULE_THEME = #{scheduleTheme},
+        SCHEDULE_CONTENT = #{scheduleContent},
+        READ = null
+        
+    where SCHEDULE_ID = #{scheduleId}
+	</update>
+	
+	<update id="updateReadSchedule" parameterType="Schedule">
+    update schedule 
+    set READ = #{read}
+        
+        
+    where SCHEDULE_ID = #{scheduleId}
+	</update>
+	
+	<delete id="deleteSchedule" parameterType="Schedule">
+		delete from schedule where SCHEDULE_ID = #{ scheduleId }
+	</delete>
+	
+</mapper>

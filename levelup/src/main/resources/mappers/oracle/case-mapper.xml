@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="caseMapper">
+	<!-- 아이템 변경 기안 RESULT MAP -->
+	<resultMap id="resultCase" type="Case">
+		<id property="caseId" column="CASE_ID" />
+		<result property="caseTitle" column="CASE_TITLE" />
+		<result property="caseContent" column="CASE_CONTENT" />
+		<result property="caseWriterId" column="CASE_WRITER_ID" />
+		<result property="caseWriterName" column="CASE_WRITER_NAME" />
+		<result property="caseType" column="CASE_TYPE" />
+		<result property="caseManagerId" column="CASE_MANAGER_ID" />
+		<result property="caseManagerName" column="CASE_MANAGER_NAME" />
+		<result property="caseStatus" column="CASE_STATUS" />
+		<result property="editDate" column="EDIT_DATE" />
+		<result property="signDate" column="SIGN_DATE" />
+		<result property="attachmentFileName" column="ATTACHMENT_FILENAME" />
+		<result property="charId" column="CHAR_ID" />
+		<result property="charName" column="CHAR_NAME" />
+		<result property="accountId" column="ACCOUNT_ID" />
+		<result property="originalItemId" column="ORIGINAL_ITEM_ID" />
+		<result property="originalItemName" column="ORIGINAL_ITEM_NAME" />
+		<result property="originalItemAmount" column="ORIGINAL_ITEM_AMOUNT" />
+		<result property="uniqueId" column="UNIQUE_ID" />
+		<result property="newItemId" column="NEW_ITEM_ID" />
+		<result property="newItemName" column="NEW_ITEM_NAME" />
+		<result property="newItemAmount" column="NEW_ITEM_AMOUNT" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="paymentStatus" column="PAYMENT_STATUS" />
+		<result property="paymentAmount" column="PAYMENT_AMOUNT" />
+		<result property="refundDate" column="REFUND_DATE" />
+		<result property="refundCause" column="REFUND_CAUSE" />
+		<result property="paymentKey" column="PAYMENT_KEY" />
+	</resultMap>
+
+	<resultMap id="resultList" type="Case">
+		<result property="caseId" column="CASE_ID" />
+		<result property="caseTitle" column="CASE_TITLE" />
+		<result property="caseContent" column="CASE_CONTENT" />
+		<result property="caseWriterId" column="CASE_WRITER_ID" />
+		<result property="caseWriterName" column="CASE_WRITER_NAME" />
+		<result property="caseType" column="CASE_TYPE" />
+		<result property="caseManagerId" column="CASE_MANAGER_ID" />
+		<result property="caseManagerName" column="CASE_MANAGER_NAME" />
+		<result property="caseStatus" column="CASE_STATUS" />
+		<result property="editDate" column="EDIT_DATE" />
+		<result property="signDate" column="SIGN_DATE" />
+		<result property="attachmentFileName" column="ATTACHMENT_FILENAME" />
+		<result property="charId" column="CHAR_ID" />
+		<result property="charName" column="CHAR_NAME" />
+		<result property="accountId" column="ACCOUNT_ID" />
+		<result property="originalItemId" column="ORIGINAL_ITEM_ID" />
+		<result property="originalItemName" column="ORIGINAL_ITEM_NAME" />
+		<result property="originalItemAmount" column="ORIGINAL_ITEM_AMOUNT" />
+		<result property="uniqueId" column="UNIQUE_ID" />
+		<result property="newItemId" column="NEW_ITEM_ID" />
+		<result property="newItemName" column="NEW_ITEM_NAME" />
+		<result property="newItemAmount" column="NEW_ITEM_AMOUNT" />
+		<result property="paymentDate" column="PAYMENT_DATE" />
+		<result property="paymentStatus" column="PAYMENT_STATUS" />
+		<result property="paymentAmount" column="PAYMENT_AMOUNT" />
+		<result property="refundDate" column="REFUND_DATE" />
+		<result property="refundCause" column="REFUND_CAUSE" />
+		<result property="paymentKey" column="PAYMENT_KEY" />
+	</resultMap>
+	<!-- ************************************************* -->
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM CASE
+	</select>
+	
+	<select id="selectSearchWriterNameCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM CASE
+		WHERE CASE_WRITER_NAME = #{keyword}
+	</select>
+	
+	<select id="selectSearchTitleCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM CASE
+		WHERE CASE_TITLE LIKE '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="selectSearchDateCount" parameterType="Search" resultType="_int">
+		SELECT COUNT(*) FROM CASE 
+		WHERE EDIT_DATE BETWEEN #{begin} AND #{end}
+	</select>
+	
+	<select id="selectSearchTypeCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM CASE
+		WHERE CASE_TYPE = #{type}
+	</select>
+	
+	<select id="selectList" parameterType="Paging" resultMap="resultList">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, CASE_ID, CASE_TITLE, CASE_CONTENT, 
+				   CASE_WRITER_ID, CASE_WRITER_NAME, CASE_TYPE, 
+		           CASE_MANAGER_ID, CASE_MANAGER_NAME, CASE_STATUS, EDIT_DATE, 
+		           SIGN_DATE, ATTACHMENT_FILENAME, CHAR_ID, CHAR_NAME, ACCOUNT_ID,
+		           ORIGINAL_ITEM_ID, ORIGINAL_ITEM_NAME, ORIGINAL_ITEM_AMOUNT, UNIQUE_ID,
+		           NEW_ITEM_ID, NEW_ITEM_NAME, NEW_ITEM_AMOUNT, PAYMENT_DATE, PAYMENT_STATUS,
+		           PAYMENT_AMOUNT, REFUND_DATE, REFUND_CAUSE, PAYMENT_KEY
+		      from (select * from CASE 
+		           order by EDIT_DATE desc)) 
+		where rnum >= #{ startRow } and rnum <= #{ endRow }
+		]]>
+	</select>
+	
+	 <select id="selectMyCaseList" parameterType="string" resultMap="resultList">
+      select * from case where CASE_MANAGER_ID = #{ myEmployeeId } and CASE_STATUS = '0'
+      ORDER BY EDIT_DATE DESC
+   </select>
+	
+
+	<select id="selectCase" parameterType="string" resultMap="resultCase">
+		select * from case where CASE_ID = #{ caseId }
+	</select>
+	
+	<select id="selectSearchWriterName" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, CASE_ID, CASE_TITLE, CASE_CONTENT, 
+				   CASE_WRITER_ID, CASE_WRITER_NAME, CASE_TYPE, 
+		           CASE_MANAGER_ID, CASE_MANAGER_NAME, CASE_STATUS, EDIT_DATE,  
+		           SIGN_DATE, ATTACHMENT_FILENAME, CHAR_ID, CHAR_NAME, ACCOUNT_ID,
+		           ORIGINAL_ITEM_ID, ORIGINAL_ITEM_NAME, ORIGINAL_ITEM_AMOUNT, UNIQUE_ID,
+		           NEW_ITEM_ID, NEW_ITEM_NAME, NEW_ITEM_AMOUNT, PAYMENT_DATE, PAYMENT_STATUS,
+		           PAYMENT_AMOUNT, REFUND_DATE, REFUND_CAUSE, PAYMENT_KEY
+			from (select * from CASE 
+				 where CASE_WRITER_NAME = #{ keyword }
+				 order by EDIT_DATE DESC))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchTitle" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, CASE_ID, CASE_TITLE, CASE_CONTENT, 
+				   CASE_WRITER_ID, CASE_WRITER_NAME, CASE_TYPE, 
+		           CASE_MANAGER_ID, CASE_MANAGER_NAME, CASE_STATUS, EDIT_DATE, 
+		           SIGN_DATE, ATTACHMENT_FILENAME, CHAR_ID, CHAR_NAME, ACCOUNT_ID,
+		           ORIGINAL_ITEM_ID, ORIGINAL_ITEM_NAME, ORIGINAL_ITEM_AMOUNT, UNIQUE_ID,
+		           NEW_ITEM_ID, NEW_ITEM_NAME, NEW_ITEM_AMOUNT, PAYMENT_DATE, PAYMENT_STATUS,
+		           PAYMENT_AMOUNT, REFUND_DATE, REFUND_CAUSE, PAYMENT_KEY
+			from (select * from CASE 
+				 where CASE_TITLE LIKE '%' || #{ keyword } || '%'
+				 order by EDIT_DATE DESC))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchType" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, CASE_ID, CASE_TITLE, CASE_CONTENT, 
+				   CASE_WRITER_ID, CASE_WRITER_NAME, CASE_TYPE, 
+		           CASE_MANAGER_ID, CASE_MANAGER_NAME, CASE_STATUS, EDIT_DATE, 
+		           SIGN_DATE, ATTACHMENT_FILENAME, CHAR_ID, CHAR_NAME, ACCOUNT_ID,
+		           ORIGINAL_ITEM_ID, ORIGINAL_ITEM_NAME, ORIGINAL_ITEM_AMOUNT, UNIQUE_ID,
+		           NEW_ITEM_ID, NEW_ITEM_NAME, NEW_ITEM_AMOUNT, PAYMENT_DATE, PAYMENT_STATUS,
+		           PAYMENT_AMOUNT, REFUND_DATE, REFUND_CAUSE, PAYMENT_KEY
+			from (select * from CASE 
+				 where CASE_TYPE = #{ type }
+				 order by EDIT_DATE DESC))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchDate" parameterType="Search" resultMap="resultList">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, CASE_ID, CASE_TITLE, CASE_CONTENT, 
+				   CASE_WRITER_ID, CASE_WRITER_NAME, CASE_TYPE, 
+		           CASE_MANAGER_ID, CASE_MANAGER_NAME, CASE_STATUS, EDIT_DATE, 
+		           SIGN_DATE, ATTACHMENT_FILENAME, CHAR_ID, CHAR_NAME, ACCOUNT_ID,
+		           ORIGINAL_ITEM_ID, ORIGINAL_ITEM_NAME, ORIGINAL_ITEM_AMOUNT, UNIQUE_ID,
+		           NEW_ITEM_ID, NEW_ITEM_NAME, NEW_ITEM_AMOUNT, PAYMENT_DATE, PAYMENT_STATUS,
+		           PAYMENT_AMOUNT, REFUND_DATE, REFUND_CAUSE, PAYMENT_KEY
+		      from (select * from CASE 
+		            where EDIT_DATE between #{begin} and #{end} 
+		             order by EDIT_DATE desc)) 
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+
+	</select>
+	
+	<insert id="insertCase" parameterType="Case">
+		INSERT INTO CASE
+		
+		<if test="caseType == 1">
+		VALUES (DEFAULT, #{ caseTitle }, #{ caseContent }, #{ caseWriterId }, #{ caseWriterName },
+		#{ caseType }, #{ caseManagerId }, #{ caseManagerName }, '0', SYSDATE, DEFAULT, #{ attachmentFileName }, #{ charId },
+		#{ charName }, #{ accountId }, #{ originalItemId }, #{ originalItemName }, #{ originalItemAmount }, #{ uniqueId }, 
+		#{ newItemId }, #{ newItemName }, #{newItemAmount}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		</if>
+		<if test="caseType == 2">
+		VALUES (DEFAULT, #{ caseTitle }, #{ caseContent }, #{ caseWriterId }, #{ caseWriterName },
+		#{ caseType }, #{ caseManagerId }, #{ caseManagerName }, '0', SYSDATE, DEFAULT, #{ attachmentFileName }, #{ charId },
+		#{ charName }, #{ accountId }, #{ originalItemId }, #{ originalItemName }, #{ originalItemAmount }, #{ uniqueId }, 
+		DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT)
+		</if>
+		<if test="caseType == 3">
+		VALUES (DEFAULT, #{ caseTitle }, #{ caseContent }, #{ caseWriterId }, #{ caseWriterName },
+		#{ caseType }, #{ caseManagerId }, #{ caseManagerName }, '0', SYSDATE, DEFAULT, #{ attachmentFileName }, #{ charId },
+		#{ charName }, #{ accountId }, #{ originalItemId }, #{ originalItemName }, #{ originalItemAmount }, #{ uniqueId }, 
+		DEFAULT, DEFAULT, DEFAULT, #{ paymentDate }, #{ paymentStatus }, #{ paymentAmount }, DEFAULT, #{ refundCause }, #{ paymentKey })
+		</if>
+
+
+	</insert>
+	
+	<update id="updateCaseAprrove" parameterType="Case">
+		<if test="caseType == 1 || caseType == 2">
+			UPDATE CASE
+			SET CASE_STATUS = '1',
+				SIGN_DATE = SYSDATE
+			WHERE CASE_ID = #{ caseId }
+		</if>
+		<if test="caseType == 3">
+			UPDATE CASE
+			SET CASE_STATUS = '1',
+				SIGN_DATE = SYSDATE,
+				REFUND_DATE = SYSDATE
+			WHERE CASE_ID = #{ caseId }
+		</if>
+	</update>
+	
+	<update id="updateCaseReject" parameterType="string">
+		update case
+		set CASE_STATUS = '2',
+			SIGN_DATE = SYSDATE
+		where CASE_ID = #{ caseId }
+	</update>
+	
+	
+	
+</mapper>

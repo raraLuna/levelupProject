@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC
+"-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 마이바티스는 sql 구문에 사용되는 값이 NULL 이면 에러 발생함 
+		NULL 을 사용할 수 있게 하려면 	-->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="cacheEnabled" value="false"/>
+	</settings>
+	
+	<typeAliases>
+		<!-- 존재하지 않는 클래스를 등록하면 톰캣 구동 안됨 
+		vo 클래스의 줄임말을 등록. mapper.xlm 에서 줄임말 쓰기 위한 용도 -->
+<!-- 		<typeAlias type="org.ict.first.member.model.vo.Member" alias="Member" />
+		<typeAlias type="org.ict.first.notice.model.vo.Notice" alias="Notice" />
+		<typeAlias type="org.ict.first.board.model.vo.Board" alias="Board" />
+		<typeAlias type="org.ict.first.common.Paging" alias="Paging"/>
+		<typeAlias type="org.ict.first.common.SearchDate" alias="SearchDate"/>
+		<typeAlias type="org.ict.first.common.SearchDatePaging" alias="SearchDatePaging"/> -->
+		
+<!-- 		<typeAlias type="org.ict.first.charevol.model.vo.CharEvol" alias="CharEvol"/> -->
+	</typeAliases>
+
+	<mappers>
+		<!-- 존재하지 않는 파일을 등록하면 톰캣 구동 안됨 -->
+		<!-- 클래스들은 java 폴더가 base -->
+<!-- 		<mapper resource="mappers/oracle/member-mapper.xml" />
+		<mapper resource="mappers/oracle/board-mapper.xml" />
+		<mapper resource="mappers/oracle/notice-mapper.xml" /> -->
+		
+<!-- 		<mapper resource="mappers/mariadb/test-mapper.xml" /> -->
+	</mappers>
+</configuration>

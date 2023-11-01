@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="inquiryMapper">
+
+	<resultMap id="resultInquiry" type="Inquiry">
+		<id property="inquiryId" column="INQUIRY_ID" />
+		<result property="userId" column="USERID" />
+		<result property="employeeId" column="EMPLOYEE_ID" />
+		<result property="inquiryTitle" column="INQUIRY_TITLE" />
+		<result property="inquiryContent" column="INQUIRY_CONTENT" />
+		<result property="answerStatus" column="ANSWER_STATUS" />
+		<result property="editDate" column="EDIT_DATE" />
+		<result property="answerDate" column="ANSWER_DATE" />
+		<result property="answerContent" column="ANSWER_CONTENT" />
+		<result property="attachmentFileName" column="ATTACHEMENT_FILENAME" />
+		<result property="inquiryType" column="INQUIRY_TYPE" />
+		<result property="employeeName" column="EMP_NAME" />
+	</resultMap>
+
+	<resultMap id="resultList" type="Inquiry">
+		<result property="inquiryId" column="INQUIRY_ID" />
+		<result property="userId" column="USERID" />
+		<result property="employeeId" column="EMPLOYEE_ID" />
+		<result property="inquiryTitle" column="INQUIRY_TITLE" />
+		<result property="inquiryContent" column="INQUIRY_CONTENT" />
+		<result property="answerStatus" column="ANSWER_STATUS" />
+		<result property="editDate" column="EDIT_DATE" />
+		<result property="answerDate" column="ANSWER_DATE" />
+		<result property="answerContent" column="ANSWER_CONTENT" />
+		<result property="attachmentFileName" column="ATTACHEMENT_FILENAME" />
+		<result property="inquiryType" column="INQUIRY_TYPE" />
+		<result property="employeeName" column="EMP_NAME" />
+	</resultMap>
+
+	<select id="selectList" parameterType="Paging"
+		resultMap="resultInquiry">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, INQUIRY_ID, USERID, EMPLOYEE_ID, 
+				   INQUIRY_TITLE, INQUIRY_CONTENT, ANSWER_STATUS, 
+		           EDIT_DATE, ANSWER_DATE, ANSWER_CONTENT, ATTACHEMENT_FILENAME, 
+		           INQUIRY_TYPE, EMP_NAME
+		      from (select * from INQUIRY 
+		           order by EDIT_DATE desc)) 
+		where rnum >= #{ startRow } and rnum <= #{ endRow }
+		]]>
+	</select>
+	
+	<select id="selectListType" parameterType="Paging" resultMap="resultInquiry">
+	  <![CDATA[
+	    SELECT *
+	    FROM (SELECT rownum rnum, INQUIRY_ID, USERID, EMPLOYEE_ID,
+	    		 INQUIRY_TITLE, INQUIRY_CONTENT, ANSWER_STATUS, 
+	    		 EDIT_DATE, ANSWER_DATE, ANSWER_CONTENT, ATTACHEMENT_FILENAME,
+	    		 INQUIRY_TYPE, EMP_NAME 
+	     	 FROM (SELECT * FROM INQUIRY
+	        WHERE INQUIRY_TYPE = #{keyword2}
+	        ORDER BY EDIT_DATE DESC
+	      )
+	    )
+	    WHERE rnum >= #{ startRow } and rnum <= #{ endRow }
+	  ]]>
+	</select>
+
+
+	<select id="selectListCount" resultType="_int">
+		select count(*) from INQUIRY
+	</select>
+	
+	<select id="selectListCountType" parameterType="_int" resultType="_int">
+		select count(*) from
+		INQUIRY where INQUIRY_TYPE = #{type}
+	</select>
+
+	<select id="selectSearchUserIDCount" parameterType="string" resultType="_int">
+		select count(*) from inquiry
+		where USERID = #{ keyword }
+	</select>
+	
+	<select id="selectSearchTitleCount" parameterType="string" resultType="_int">
+		select count(*) from inquiry
+		where INQUIRY_TITLE like '%' || #{ keyword } || '%'
+	</select>
+	
+	<select id="selectSearchTypeCount" parameterType="string" resultType="_int">
+		select count(*) from inquiry
+		where INQUIRY_TYPE = #{ keyword }
+	</select>
+	
+	<select id="selectSearchDateCount" resultType="_int" parameterType="Search">
+		select count(*) from inquiry 
+		where EDIT_DATE between #{begin} and #{end}
+	</select>
+	
+	<select id="selectSearchUserID" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, INQUIRY_ID, USERID, EMPLOYEE_ID, INQUIRY_TITLE, INQUIRY_CONTENT, 
+				  ANSWER_STATUS, EDIT_DATE, ANSWER_DATE, ANSWER_CONTENT, ATTACHEMENT_FILENAME, INQUIRY_TYPE,
+				  EMP_NAME
+			from (select * from INQUIRY 
+				 where USERID = #{ keyword } 
+				 order by EDIT_DATE DESC))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+
+
+	
+		<select id="selectSearchType" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, INQUIRY_ID, USERID, EMPLOYEE_ID, INQUIRY_TITLE, INQUIRY_CONTENT, 
+				  ANSWER_STATUS, EDIT_DATE, ANSWER_DATE, ANSWER_CONTENT, ATTACHEMENT_FILENAME, INQUIRY_TYPE,
+				  EMP_NAME
+			from (select * from INQUIRY 
+				 where INQUIRY_TYPE = #{ type }
+				 order by EDIT_DATE DESC))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+	<select id="selectSearchTitle" parameterType="Search" resultMap="resultList">
+		select *
+		from (select rownum rnum, INQUIRY_ID, USERID, EMPLOYEE_ID, INQUIRY_TITLE, INQUIRY_CONTENT, 
+				  ANSWER_STATUS, EDIT_DATE, ANSWER_DATE, ANSWER_CONTENT, ATTACHEMENT_FILENAME, INQUIRY_TYPE,
+				  EMP_NAME
+			from (select * from INQUIRY 
+				 where INQUIRY_TITLE like '%' || #{ keyword } || '%'
+				 order by EDIT_DATE DESC))
+		where rnum between #{ startRow } and #{ endRow }
+	</select>
+	
+		<select id="selectSearchDate" parameterType="Search" resultMap="resultList">
+		<![CDATA[
+		select * 
+		from (select rownum rnum, INQUIRY_ID, USERID, EMPLOYEE_ID, 
+		           INQUIRY_TITLE, INQUIRY_CONTENT, ANSWER_STATUS, 
+		           EDIT_DATE, ANSWER_DATE, 
+		           ANSWER_CONTENT, ATTACHEMENT_FILENAME, INQUIRY_TYPE, EMP_NAME
+		      from (select * from INQUIRY 
+		            where EDIT_DATE between #{begin} and #{end} 
+		             order by EDIT_DATE desc)) 
+		where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
+	
+	
+	<select id="selectUserPreviousInquiry" parameterType="string" resultMap="resultList">
+		select * from INQUIRY where userid = #{ userId }
+	</select>
+
+
+	<insert id="insertInquiry" parameterType="Inquiry">
+		<if test="inquiryType != null">
+			insert into inquiry
+			(INQUIRY_ID, USERID, INQUIRY_TITLE, INQUIRY_CONTENT, ANSWER_STATUS,
+			EDIT_DATE,ATTACHEMENT_FILENAME, INQUIRY_TYPE)
+			VALUES (default, #{userId}, #{inquiryTitle},
+			#{inquiryContent}, #{answerStatus}, sysdate,#{attachmentFileName}, #{inquiryType})
+		</if>
+		<if test="inquiryType == null">
+			insert into inquiry
+			(INQUIRY_ID, USERID, INQUIRY_TITLE, INQUIRY_CONTENT, ANSWER_STATUS,
+			EDIT_DATE,ATTACHEMENT_FILENAME, INQUIRY_TYPE)
+			VALUES (default, #{userId}, #{inquiryTitle},
+			#{inquiryContent}, #{answerStatus}, sysdate,#{attachmentFileName}, 3)
+		</if>
+	</insert>
+	
+	<update id="updateInquiryAnswer" parameterType="Inquiry">				
+		update inquiry 
+		set ANSWER_STATUS = 'Y',
+		ANSWER_DATE = SYSDATE,
+		ANSWER_CONTENT = #{ answerContent },
+		EMPLOYEE_ID = #{ employeeId },
+		EMP_NAME = #{ employeeName }
+		where INQUIRY_ID = #{ inquiryId }
+		
+	</update>
+	
+	<update id="updateInquiry" parameterType="Inquiry">				
+		update inquiry 
+		set INQUIRY_TITLE = #{ inquiryTitle },
+		MODIFY_DATE = SYSDATE,
+		<if test="attachmentFileName != null">
+		ATTACHEMENT_FILENAME = #{ attachmentFileName },
+		</if>
+		<if test="attachmentFileName == null">
+		ATTACHEMENT_FILENAME = NULL,
+		</if>
+		INQUIRY_CONTENT = #{ inquiryContent }
+		where INQUIRY_ID = #{ inquiryId }
+	</update>
+
+	
+	<select id="selectInquiry" parameterType="string" resultMap="resultInquiry">
+		select * from INQUIRY where INQUIRY_ID = #{ inquiryId }
+	</select>
+	
+	<delete id="deleteInquiry" parameterType="string">
+		delete from inquiry where inquiry_id = #{ inquiryId }
+	</delete>
+	
+</mapper>
